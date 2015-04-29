@@ -12,22 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace Components
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SampleUserControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SampleUserControl : UserControl
     {
-        public MainWindow()
+        public SampleUserControl()
         {
             InitializeComponent();
         }
 
-        private void SampleUserControl_Loaded(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            Debug.WriteLine("Button Clicked");
         }
     }
 }

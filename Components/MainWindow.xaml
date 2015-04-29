@@ -1,8 +1,11 @@
 ﻿<Window x:Class="Components.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sampleUserControl="clr-namespace:Components"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <sampleUserControl:SampleUserControl Loaded="SampleUserControl_Loaded" />
+
+
     </Grid>
 </Window>
