@@ -2,11 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:cpu="clr-namespace:Components.CPUPerformance"
-        xmlns:sampleUserControl="clr-namespace:Components"
-        Title="MainWindow" Width="900" Height="600">
+        xmlns:chart="clr-namespace:Components.PieChart"
+        Title="MainWindow" Width="900" Height="900">
     <Grid>
-        <cpu:CPUView HorizontalAlignment="Left" VerticalAlignment="Top" Width="450" Height="300"/>
-
+        <cpu:CPUView HorizontalAlignment="Left" VerticalAlignment="Top" Width="450" Height="450"/>
+        <chart:PieChart Width="450" Height="450" HorizontalAlignment="Right" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
