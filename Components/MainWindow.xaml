@@ -3,10 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:cpu="clr-namespace:Components.CPUPerformance"
         xmlns:chart="clr-namespace:Components.PieChart"
+        xmlns:gauge="clr-namespace:Components.Gauge"
         Title="MainWindow" Width="900" Height="900">
     <Grid>
         <cpu:CPUView HorizontalAlignment="Left" VerticalAlignment="Top" Width="450" Height="450"/>
         <chart:PieChart Width="450" Height="450" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <gauge:Gauge Width="450" Height="450" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
 
     </Grid>
 </Window>
