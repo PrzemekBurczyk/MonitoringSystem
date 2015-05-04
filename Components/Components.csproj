@@ -34,9 +34,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Sparrow.BulletGraph.Wpf.40">
+      <HintPath>..\packages\Sparrow.BulletGraph.Wpf.13.1.0.118\lib\net40\Sparrow.BulletGraph.Wpf.40.dll</HintPath>
+    </Reference>
+    <Reference Include="Sparrow.Chart.Wpf.40">
+      <HintPath>..\packages\Sparrow.Chart.Wpf.13.1.0.118\lib\net40\Sparrow.Chart.Wpf.40.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,9 +62,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CPUPerformance\CPUView.xaml.cs">
+      <DependentUpon>CPUView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CPUPerformance\Model.cs" />
+    <Compile Include="CPUPerformance\ViewModel.cs" />
     <Compile Include="SampleUserControl.xaml.cs">
       <DependentUpon>SampleUserControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="CPUPerformance\CPUView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,6 +109,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
