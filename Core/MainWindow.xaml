@@ -15,9 +15,11 @@
             <ColumnDefinition Width="9*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Button Content="Start Listening" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Width="129" Click="Button_Click"/>
+        <Button Name="ToggleButton" Content="Toggle Transmission from sensor" Grid.Column="1" HorizontalAlignment="Left" Margin="0,69,0,0" Grid.Row="1" VerticalAlignment="Top" Width="206" Height="24" IsEnabled="False" Click="Button_Click_1"/>
 
         <!--<components:SampleUserControl Grid.Row="1" Grid.Column="1"/>-->
-        <cpu:CPUView Grid.Row="1" Grid.Column="1"/>
-       
+        <!-- <cpu:CPUView Grid.Row="1" Grid.Column="1"/> -->
+
     </Grid>
 </Window>

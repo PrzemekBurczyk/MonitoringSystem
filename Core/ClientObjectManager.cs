@@ -22,6 +22,11 @@ namespace Core
 
         public ClientObject getObject(int id)
         {
+            if (clientObjectList.Count < id + 1)
+            {
+                return null;
+            }
+
             return clientObjectList[id];
         }
     }

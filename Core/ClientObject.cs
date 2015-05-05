@@ -11,8 +11,6 @@ namespace Core
         public String type;
         public ClientConnection clientConnection;
 
-        public List<SensorObject> sensors;
-
         public void passData(String data)
         {
             Console.WriteLine("Passing data to sensors : " + data);
@@ -20,7 +18,7 @@ namespace Core
 
         public void toggleTransmission(int sensorId)
         {
-            //clientConnection.toggleTransmission
+            clientConnection.WriteMessage("Transmission toggled for sensor "  + sensorId.ToString() + "\n");
         }
     }
 }

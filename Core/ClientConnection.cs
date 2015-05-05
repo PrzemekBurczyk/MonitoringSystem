@@ -67,7 +67,7 @@ namespace Core
         public void WriteMessage(String message)
         {
             ASCIIEncoding encoder = new ASCIIEncoding();
-            byte[] responseMessage = encoder.GetBytes("OK");
+            byte[] responseMessage = encoder.GetBytes(message);
             clientStream.Write(responseMessage, 0, responseMessage.Length);
         }
     } 
