@@ -20,9 +20,31 @@ namespace Core
     /// </summary>
     public partial class MainWindow : Window
     {
+        ServerCommunicationManager serverCommunicationManager;
+        ClientObjectManager clientObjectManager;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            clientObjectManager = new ClientObjectManager();
+            serverCommunicationManager = new ServerCommunicationManager(clientObjectManager);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            serverCommunicationManager.Start();
+            ToggleButton.IsEnabled = true;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            //Run this only after connection and receiving initial data from Client
+            ClientObject placeholder = clientObjectManager.getObject(0);
+            if (placeholder != null)
+            {
+                placeholder.toggleTransmission(1);
+            }
         }
     }
 }
