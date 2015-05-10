@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-    class ClientConnection
+    public class ClientConnection
     {
         public TcpClient tcpClient;
         protected NetworkStream clientStream;

@@ -1,33 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Core
 {
-    class ClientObjectManager
+    public class ClientObjectManager
     {
-        protected List<ClientObject> clientObjectList = new List<ClientObject>();
+        //public List<ClientObject> ClientObjectList = new List<ClientObject>();
+        private int clientNumber = 0;
 
+        public ObservableCollection<ClientObject> ClientObjectCollection { get; set; }
         public void newObject(ClientConnection clientConnection)
         {
-            ClientObject clientObject = new ClientObject();
+            ClientObject clientObject = new ClientObject("Client" + clientNumber++);
             clientObject.clientConnection = clientConnection;
 
             clientConnection.onDataReceived = clientObject.passData;
 
-            clientObjectList.Add(clientObject);
+            //ClientObjectList.Add(clientObject);
+            ClientObjectCollection.Add(clientObject);
         }
 
         public ClientObject getObject(int id)
         {
-            if (clientObjectList.Count < id + 1)
+            if (ClientObjectCollection.Count < id + 1)
             {
                 return null;
             }
 
-            return clientObjectList[id];
+            return ClientObjectCollection[id];
         }
     }
 }

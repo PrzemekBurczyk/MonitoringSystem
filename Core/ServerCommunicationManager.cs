@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-    delegate void ClientDataReceivedDelegate(String data);
+    public delegate void ClientDataReceivedDelegate(String data);
 
-    class ServerCommunicationManager
+    public class ServerCommunicationManager
     {
         private TcpListener tcpListener;
         private Thread listenThread;

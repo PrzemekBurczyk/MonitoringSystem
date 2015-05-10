@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:components="clr-namespace:Components;assembly=Components"
         xmlns:cpu="clr-namespace:Components.CPUPerformance;assembly=Components"
-        Title="MainWindow" Width="900" Height="600" >
+        Title="MainWindow" Width="900" Height="600">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -12,11 +13,16 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="9*"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Start Listening" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Width="129" Click="Button_Click"/>
-        <Button Name="ToggleButton" Content="Toggle Transmission from sensor" Grid.Column="1" HorizontalAlignment="Left" Margin="0,69,0,0" Grid.Row="1" VerticalAlignment="Top" Width="206" Height="24" IsEnabled="False" Click="Button_Click_1"/>
+        <DataGrid
+            ItemsSource="{Binding ClientObjectManager.ClientObjectCollection}"
+            AutoGenerateColumns="False" Grid.RowSpan="2" Margin="0,0,792,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Clients" Binding="{Binding Name}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--<Button Content="Start Listening" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Width="129" Click="Button_Click"/>-->
+        <!--<Button Name="ToggleButton" Content="Toggle Transmission from sensor" Grid.Column="1" HorizontalAlignment="Left" Margin="0,69,0,0" Grid.Row="1" VerticalAlignment="Top" Width="206" Height="24" IsEnabled="False" Click="Button_Click_1"/>-->
 
         <!--<components:SampleUserControl Grid.Row="1" Grid.Column="1"/>-->
         <!-- <cpu:CPUView Grid.Row="1" Grid.Column="1"/> -->

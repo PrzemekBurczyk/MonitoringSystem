@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-    class ClientObject
+    public class ClientObject
     {
+        public String Name { get; set; }
         public String type;
+
+        public ClientObject(String name)
+        {
+            Name = name;
+        }
+        
         public ClientConnection clientConnection;
 
         public void passData(String data)
