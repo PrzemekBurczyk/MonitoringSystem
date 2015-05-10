@@ -173,6 +173,10 @@
       <Project>{6efd5895-177b-4bbb-af52-29f4d53b3fbd}</Project>
       <Name>CircularGauge</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GuiComponentInterfaces\GuiComponentInterfaces.csproj">
+      <Project>{bbe9c68c-57cf-45d7-a6e5-3d5711ef3789}</Project>
+      <Name>GuiComponentInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
