@@ -18,7 +18,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Name="MainGrid">
         <Grid.DataContext>
             <local:ViewModel/>
         </Grid.DataContext>
@@ -29,14 +29,16 @@
                 <RowDefinition/>
                 <RowDefinition Height="220"/>
             </Grid.RowDefinitions>
-            <chart:SparrowChart Grid.Row="1" RenderingMode="WritableBitmap" ContainerBorderStyle="{StaticResource containerStyle}">
+            <chart:SparrowChart  Grid.Row="1" RenderingMode="WritableBitmap" ContainerBorderStyle="{StaticResource containerStyle}">
                 <chart:SparrowChart.XAxis>
                     <chart:DateTimeXAxis Interval="0:0:1" CrossLineStyle="{StaticResource crossLineStyle}" Visibility="Collapsed"/>
                 </chart:SparrowChart.XAxis>
                 <chart:SparrowChart.YAxis>
-                    <chart:LinearYAxis MinValue="0" CrossLineStyle="{StaticResource crossLineStyle}" Interval="10" MaxValue="100" Visibility="Collapsed"/>
+                    <chart:LinearYAxis Name="YAxis" MinValue="0" MaxValue="100" CrossLineStyle="{StaticResource crossLineStyle}" Interval="10" Visibility="Collapsed"/>
                 </chart:SparrowChart.YAxis>
                 <chart:AreaSeries XPath="Time" Stroke="#FF117DBB" StrokeThickness="1" YPath="Percentage" Fill="#11117DBB" PointsSource="{Binding CPU}"/>
+                <chart:AreaSeries XPath="Time" Stroke="#FFFF0000" StrokeThickness="1" YPath="MemoryUsage" Fill="#11117DBB" PointsSource="{Binding CPU}"/>
+
             </chart:SparrowChart>
             <Grid Grid.Row="0">
                 <TextBlock Text="% Utilization" FontFamily="Segoe UI Light" Foreground="#FF707070" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
