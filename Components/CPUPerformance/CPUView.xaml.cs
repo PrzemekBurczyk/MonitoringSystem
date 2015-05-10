@@ -23,6 +23,13 @@ namespace Components.CPUPerformance
         public CPUView()
         {
             InitializeComponent();
+            ViewModel viewModel = (ViewModel)MainGrid.DataContext;
+            viewModel.OnTick += new EventHandler(OnTick);
+        }
+
+        private void OnTick(object sender, EventArgs eventArgs) {
+            YAxis.MaxValue = int.Parse(YAxis.MaxValue.ToString()) + 1;
+            
         }
     }
 }

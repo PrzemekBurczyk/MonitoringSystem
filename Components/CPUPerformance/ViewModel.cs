@@ -14,6 +14,8 @@ namespace Components.CPUPerformance
 {
     public class ViewModel : INotifyPropertyChanged
     {
+        public EventHandler OnTick { get; set; }
+
         public ObservableCollection<Model> CPU { get; set; }
         public string ProcessorID { get; set; }
 
@@ -32,6 +34,13 @@ namespace Components.CPUPerformance
         {
             get { return upTimeString; }
             set { upTimeString = value; OnPropertyChanged(new PropertyChangedEventArgs("UpTime")); }
+        }
+
+        private string maxVal;
+        public string MaxVal
+        {
+            get { return maxVal; }
+            set { maxVal = value; OnPropertyChanged(new PropertyChangedEventArgs("MaxVal")); }
         }
 
         private string speed;
@@ -124,6 +133,8 @@ namespace Components.CPUPerformance
         {
             mgt = new ManagementClass("Win32_Processor");
             procs = mgt.GetInstances();
+
+            MaxVal = "100";
 
             CPU = new ObservableCollection<Model>();
             timer = new DispatcherTimer();
@@ -229,8 +240,13 @@ namespace Components.CPUPerformance
             CPU.RemoveAt(0);
             double percentage = cpuCounter.NextValue();
             Utilization = percentage.ToString(String.Format("0")) + "%";
-            CPU.Add(new Model(time, percentage, 0));
+            CPU.Add(new Model(time, percentage, percentage * 2));
             time = time.AddSeconds(1);
+
+            if (OnTick != null)
+            {
+                OnTick(this, EventArgs.Empty);
+            }
         }
         public static TimeSpan GetUptime()
         {
