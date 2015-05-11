@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Components.Console.Console"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Components.Console"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Name="MainGrid">
+        <Grid.DataContext>
+            <local:ViewModel/>
+        </Grid.DataContext>
+        
+        <TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" 
+             AcceptsReturn="True" Name="textBox" Text="{Binding ConsoleText}">
+        </TextBox>
+    </Grid>
+</UserControl>
