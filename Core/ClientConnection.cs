@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,20 +16,34 @@ namespace Core
 
         public ClientDataReceivedDelegate onDataReceived;
 
+        public ClientConnection(TcpClient client)
+        {
+            tcpClient = client;
+            clientStream = tcpClient.GetStream();
+        }
+
+        public ClientObject retreiveClientObject()
+        {
+            Console.WriteLine("Waiting for data from client");
+
+            string clientJsonData = readMessage();
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ClientObject));
+            MemoryStream ms = new MemoryStream(System.Text.ASCIIEncoding.ASCII.GetBytes(clientJsonData));
+            ClientObject clientData = (ClientObject)serializer.ReadObject(ms);
+
+            WriteMessage("OK");
+
+            return clientData;
+        }
+
         public void HandleClientComm()
         {
-            clientStream = tcpClient.GetStream();
-
             try
             {
-                String sensorData = readMessage();
-                WriteMessage("OK");
-
                 while (true)
                 {
                     String message = readMessage();
                     onDataReceived(message);
-                    //Console.WriteLine("Message : " + message);
                 }
             }
             catch (IOException)
@@ -49,7 +64,6 @@ namespace Core
             int bytesRead;
 
             bytesRead = 0;
-
 
             bytesRead = clientStream.Read(message, 0, 4096);
 

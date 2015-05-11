@@ -44,12 +44,10 @@ namespace Core
                 Console.WriteLine("Accepted client connection");
 
                 // Create connection object
-                ClientConnection connection = new ClientConnection();
-                connection.tcpClient = client;
+                ClientConnection connection = new ClientConnection(client);
+                ClientObject clientData = connection.retreiveClientObject();
 
-
-
-                clientObjectManager.newObject(connection);
+                clientObjectManager.create(connection, clientData);
 
                 Thread clientThread = new Thread(new ThreadStart(connection.HandleClientComm));
                 clientThread.Start();

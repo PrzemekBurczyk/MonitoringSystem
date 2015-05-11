@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace GuiComponentInterfaces
 {
-    interface GuiComponentInterface
+    public enum DataType
     {
+        TEXT,
+        INTEGER,
+        VECTOR,
+        BITMAP
     }
 }

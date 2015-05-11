@@ -39,7 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GuiComponentInterface.cs" />
+    <Compile Include="DataType.cs" />
+    <Compile Include="GuiComponentFactory.cs" />
+    <Compile Include="IGuiComponent.cs" />
+    <Compile Include="PlaceholderTextGuiElementImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -57,10 +57,19 @@ namespace Core
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             //Run this only after connection and receiving initial data from Client
-            ClientObject placeholder = clientObjectManager.getObject(0);
+            ClientObject placeholder = clientObjectManager.get(0);
             if (placeholder != null)
             {
                 placeholder.toggleTransmission(1);
+            }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            ClientObject placeholder = clientObjectManager.get(0);
+            if (placeholder != null)
+            {
+                placeholder.sendDataBack();
             }
         }
     }
