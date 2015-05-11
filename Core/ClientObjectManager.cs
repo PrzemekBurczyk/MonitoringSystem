@@ -13,13 +13,16 @@ namespace Core
         private int clientNumber = 0;
 
         public ObservableCollection<ClientObject> ClientObjectCollection { get; set; }
+
+        public ObservableCollection<ClientObject> CustomCollection { get; set; }
         
         public void create(ClientConnection clientConnection, ClientObject clientObject)
         {
             clientObject.clientConnection = clientConnection;
             clientConnection.onDataReceived = clientObject.passData;
 
-            ClientObjectCollection.Add(clientObject);
+            //ClientObjectCollection.Add(clientObject);
+            CustomCollection.Add(clientObject);
         }
 
         public ClientObject get(int id)
