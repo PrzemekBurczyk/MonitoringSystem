@@ -15,7 +15,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <DataGrid
-            ItemsSource="{Binding ClientObjectManager.ClientObjectCollection}"
+            ItemsSource="{Binding ClientObjectManager.CustomCollection}"
             AutoGenerateColumns="False" Grid.RowSpan="2" Margin="0,0,792,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Clients" Binding="{Binding Name}" Width="*"/>

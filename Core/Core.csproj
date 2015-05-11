@@ -57,6 +57,7 @@
     <Compile Include="ClientsDataGrid.xaml.cs">
       <DependentUpon>ClientsDataGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DispatchingObservableCollection.cs" />
     <Compile Include="Sensor.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="ServerCommunicationManager.cs" />
