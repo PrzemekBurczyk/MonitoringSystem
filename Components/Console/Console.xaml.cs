@@ -24,19 +24,19 @@ namespace Components.Console
     {
         private ViewModel ViewModel { get; set; }
 
-        public void addData(string line)
+        public void AddData(string line)
         {
-            ViewModel.ConsoleText += "\n" + line;
+            ViewModel.ConsoleText += DateTime.Now.ToString() + "> " + line + "\n";
         }
 
-        public void addData(string[] lines)
+        public void AddData(string[] lines)
         {
             foreach (string line in lines) {
-                addData(line);
+                AddData(line);
             }
         }
 
-        public void clearData()
+        public void ClearData()
         {
             ViewModel.ConsoleText = "";
         }
@@ -61,6 +61,11 @@ namespace Components.Console
         public DataType[] GetTypes()
         {
             return new DataType[] { DataType.TEXT, DataType.VECTOR };
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddData("new line");
         }
 
     }

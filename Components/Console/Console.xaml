@@ -11,8 +11,16 @@
             <local:ViewModel/>
         </Grid.DataContext>
         
-        <TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <TextBox Grid.Row="0" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" 
              AcceptsReturn="True" Name="textBox" Text="{Binding ConsoleText}">
         </TextBox>
+        
+        <Button Grid.Row="1" Content="Simulate line add" Click="Button_Click"/>
+        
     </Grid>
 </UserControl>
