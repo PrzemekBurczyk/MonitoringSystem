@@ -9,5 +9,7 @@ namespace GuiComponentInterfaces
     public interface IGuiComponent
     {
         DataType[] GetTypes();
+
+        void AddValue(DataValue dataValue);
     }
 }

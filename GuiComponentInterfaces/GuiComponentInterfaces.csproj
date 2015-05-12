@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataType.cs" />
+    <Compile Include="DataValue.cs" />
     <Compile Include="GuiComponentFactory.cs" />
     <Compile Include="IGuiComponent.cs" />
     <Compile Include="PlaceholderTextGuiElementImpl.cs" />

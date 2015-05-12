@@ -26,7 +26,7 @@ namespace Components.Console
 
         public void AddData(string line)
         {
-            ViewModel.ConsoleText += DateTime.Now.ToString() + "> " + line + "\n";
+            ViewModel.ConsoleText += line + "\n";
         }
 
         public void AddData(string[] lines)
@@ -60,13 +60,22 @@ namespace Components.Console
 
         public DataType[] GetTypes()
         {
-            return new DataType[] { DataType.TEXT, DataType.VECTOR };
+            return new DataType[] { DataType.TEXT };
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AddData("new line");
+            DataValue dataValue = new DataValue();
+            dataValue.Timestamp = DateTime.Now.Ticks;
+            dataValue.Value = "new line";
+            dataValue.DataSeriesId = 0;
+            dataValue.Type = DataType.TEXT;
+            AddValue(dataValue);
         }
 
+        public void AddValue(DataValue dataValue)
+        {
+            AddData(new DateTime(dataValue.Timestamp).ToString() + " > " + dataValue.Value);
+        }
     }
 }
