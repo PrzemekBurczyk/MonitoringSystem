@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClientMessage.cs" />
     <Compile Include="ClientsDataGrid.xaml.cs">
       <DependentUpon>ClientsDataGrid.xaml</DependentUpon>
     </Compile>

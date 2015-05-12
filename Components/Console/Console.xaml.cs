@@ -63,5 +63,9 @@ namespace Components.Console
             return new DataType[] { DataType.TEXT, DataType.VECTOR };
         }
 
+        public void AddValue(DataValue dataValue)
+        {
+            addData(dataValue.Value);
+        }
     }
 }

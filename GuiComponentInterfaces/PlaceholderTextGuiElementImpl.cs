@@ -12,9 +12,9 @@ namespace GuiComponentInterfaces
             return new DataType[] { DataType.TEXT };
         }
 
-        public void AddValue(string value, int dataSeriesId)
+        public void AddValue(DataValue dataValue)
         {
-            Console.WriteLine("Written to placeholder TextElement, value : %s, dataSeriesId : %d", value, dataSeriesId);
+            Console.WriteLine("Written to placeholder TextElement, value : %s, dataSeriesId : %d", dataValue.Value, dataValue.DataSeriesId);
         }
     }
 }
