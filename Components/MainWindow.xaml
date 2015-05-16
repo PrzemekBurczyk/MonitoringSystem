@@ -5,11 +5,12 @@
         xmlns:chart="clr-namespace:Components.PieChart"
         xmlns:gauge="clr-namespace:Components.Gauge"
         xmlns:console="clr-namespace:Components.Console"
+        xmlns:richConsole="clr-namespace:Components.RichConsole"
         Title="MainWindow" Width="900" Height="900">
     <Grid>
         <cpu:CPUView HorizontalAlignment="Left" VerticalAlignment="Top" Width="450" Height="450"/>
         <chart:PieChart Width="450" Height="450" HorizontalAlignment="Right" VerticalAlignment="Top"/>
         <gauge:Gauge Width="450" Height="450" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-        <console:Console HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="450" Height="450"/>
+        <richConsole:RichConsole HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="450" Height="450"/>
     </Grid>
 </Window>

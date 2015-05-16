@@ -26,7 +26,7 @@ namespace Components.Console
 
         public void addData(string line)
         {
-            ViewModel.ConsoleText += "\n" + line;
+            ViewModel.ConsoleText += line + "\n";
         }
 
         public void addData(string[] lines)
@@ -45,7 +45,21 @@ namespace Components.Console
         {
             InitializeComponent();
             Loaded += Console_Loaded;
+            //Button btn = new Button();
+            //btn.Name = "btn1";
+            //btn.Click += btn1_Click;
         }
+                   
+        //private void btn1_Click(object sender, RoutedEventArgs e)
+        //{
+        //    DataValue dv = new DataValue();
+        //    dv.Timestamp = System.DateTime.Now.Ticks;
+        //    dv.Value = "123";
+        //    dv.Type = DataType.TEXT;
+        //    dv.DataSeriesId = 1;
+        //    AddValue(dv);
+        //}
+
 
         private void Console_Loaded(object sender, RoutedEventArgs e)
         {
@@ -60,12 +74,12 @@ namespace Components.Console
 
         public DataType[] GetTypes()
         {
-            return new DataType[] { DataType.TEXT, DataType.VECTOR };
+            return new DataType[] { DataType.TEXT, DataType.INTEGER };
         }
 
         public void AddValue(DataValue dataValue)
         {
-            addData(dataValue.Value);
+            addData(new DateTime(dataValue.Timestamp).ToLongTimeString() + " - " + dataValue.Value);
         }
     }
 }
