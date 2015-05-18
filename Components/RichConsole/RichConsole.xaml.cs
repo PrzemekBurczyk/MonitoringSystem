@@ -19,7 +19,7 @@ namespace Components.RichConsole
     /// <summary>
     /// Interaction logic for RichConsole.xaml
     /// </summary>
-    public partial class RichConsole : UserControl
+    public partial class RichConsole : UserControl, IGuiComponent
     {
         public void addData(string line, int seriesId)
         {

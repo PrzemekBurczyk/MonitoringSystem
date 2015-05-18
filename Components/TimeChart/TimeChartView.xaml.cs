@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuiComponentInterfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace Components.TimeChart
     /// <summary>
     /// Interaction logic for TimeChartView.xaml
     /// </summary>
-    public partial class TimeChartView : UserControl
+    public partial class TimeChartView : UserControl, IGuiComponent
     {
         public TimeChartView()
         {
@@ -30,6 +31,15 @@ namespace Components.TimeChart
         private void OnTick(object sender, EventArgs eventArgs)
         {
             //YAxis.MaxValue = int.Parse(YAxis.MaxValue.ToString()) + 1;
+        }
+
+        public override DataType[] GetTypes()
+        {
+            return new DataType[] { DataType.INTEGER };
+        }
+
+        public override void AddValue(DataValue dataValue)
+        {
 
         }
     }
