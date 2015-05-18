@@ -93,6 +93,11 @@
     <Compile Include="RichConsole\RichConsole.xaml.cs">
       <DependentUpon>RichConsole.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TimeChart\Model.cs" />
+    <Compile Include="TimeChart\TimeChartView.xaml.cs">
+      <DependentUpon>TimeChartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TimeChart\ViewModel.cs" />
     <Page Include="Console\Console.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -130,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RichConsole\RichConsole.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TimeChart\TimeChartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,7 +9,7 @@
         Title="MainWindow" Width="900" Height="900">
     <Grid>
         <cpu:CPUView HorizontalAlignment="Left" VerticalAlignment="Top" Width="450" Height="450"/>
-        <chart:PieChart Width="450" Height="450" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <!--<chart:PieChart Width="450" Height="450" HorizontalAlignment="Right" VerticalAlignment="Top"/>-->
         <gauge:Gauge Width="450" Height="450" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
         <richConsole:RichConsole HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="450" Height="450"/>
     </Grid>
