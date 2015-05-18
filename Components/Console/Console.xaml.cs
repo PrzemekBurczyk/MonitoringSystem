@@ -24,19 +24,19 @@ namespace Components.Console
     {
         private ViewModel ViewModel { get; set; }
 
-        public void AddData(string line)
+        public void addData(string line)
         {
             ViewModel.ConsoleText += line + "\n";
         }
 
-        public void AddData(string[] lines)
+        public void addData(string[] lines)
         {
             foreach (string line in lines) {
-                AddData(line);
+                addData(line);
             }
         }
 
-        public void ClearData()
+        public void clearData()
         {
             ViewModel.ConsoleText = "";
         }
@@ -45,7 +45,21 @@ namespace Components.Console
         {
             InitializeComponent();
             Loaded += Console_Loaded;
+            //Button btn = new Button();
+            //btn.Name = "btn1";
+            //btn.Click += btn1_Click;
         }
+                   
+        //private void btn1_Click(object sender, RoutedEventArgs e)
+        //{
+        //    DataValue dv = new DataValue();
+        //    dv.Timestamp = System.DateTime.Now.Ticks;
+        //    dv.Value = "123";
+        //    dv.Type = DataType.TEXT;
+        //    dv.DataSeriesId = 1;
+        //    AddValue(dv);
+        //}
+
 
         private void Console_Loaded(object sender, RoutedEventArgs e)
         {
@@ -60,22 +74,12 @@ namespace Components.Console
 
         public DataType[] GetTypes()
         {
-            return new DataType[] { DataType.TEXT };
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            DataValue dataValue = new DataValue();
-            dataValue.Timestamp = DateTime.Now.Ticks;
-            dataValue.Value = "new line";
-            dataValue.DataSeriesId = 0;
-            dataValue.Type = DataType.TEXT;
-            AddValue(dataValue);
+            return new DataType[] { DataType.TEXT, DataType.INTEGER };
         }
 
         public void AddValue(DataValue dataValue)
         {
-            AddData(new DateTime(dataValue.Timestamp).ToString() + " > " + dataValue.Value);
+            addData(new DateTime(dataValue.Timestamp).ToLongTimeString() + " - " + dataValue.Value);
         }
     }
 }
