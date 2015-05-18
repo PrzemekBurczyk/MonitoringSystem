@@ -6,11 +6,21 @@
         xmlns:gauge="clr-namespace:Components.Gauge"
         xmlns:console="clr-namespace:Components.Console"
         xmlns:richConsole="clr-namespace:Components.RichConsole"
+        xmlns:timechart="clr-namespace:Components.TimeChart"
         Title="MainWindow" Width="900" Height="900">
     <Grid>
-        <cpu:CPUView HorizontalAlignment="Left" VerticalAlignment="Top" Width="450" Height="450"/>
-        <!--<chart:PieChart Width="450" Height="450" HorizontalAlignment="Right" VerticalAlignment="Top"/>-->
-        <gauge:Gauge Width="450" Height="450" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-        <richConsole:RichConsole HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="450" Height="450"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <cpu:CPUView Grid.Row="0" Grid.Column="0"/>
+        <timechart:TimeChartView Grid.Row="0" Grid.Column="1"/>
+        <gauge:Gauge Grid.Row="1" Grid.Column="0"/>
+        <richConsole:RichConsole Grid.Row="1" Grid.Column="1"/>
     </Grid>
 </Window>

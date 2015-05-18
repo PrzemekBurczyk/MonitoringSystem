@@ -11,7 +11,6 @@ namespace Components.TimeChart
     {
         public DateTime Time { get; set; }
         public double Value { get; set; }
-        public DataType Type { get; set; }
         public int DataSeriesId { get; set; }
     }
 }
