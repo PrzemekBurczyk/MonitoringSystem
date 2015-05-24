@@ -12,11 +12,24 @@ namespace Core
     class MainWindowViewModel
     {
         private ClientObjectManager clientObjectManager;
+        private bool _isExpanded;
         ServerCommunicationManager serverCommunicationManager;
         public ClientObjectManager ClientObjectManager
         {
             get { return clientObjectManager; }
             set { clientObjectManager = value; }
+        }
+
+        public bool IsExpanded
+        {
+            get { return _isExpanded; }
+            set
+            {
+                if (_isExpanded != value)
+                {
+                    _isExpanded = value;
+                }
+            }
         }
 
         public MainWindowViewModel()
