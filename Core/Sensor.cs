@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 namespace Core
 {
     [DataContract]
-    class Sensor
+    public class Sensor
     {
         [DataMember]
         int id;

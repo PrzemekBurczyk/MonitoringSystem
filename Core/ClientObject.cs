@@ -22,8 +22,8 @@ namespace Core
         
         public ClientConnection clientConnection;
 
-        [DataMember(Name = "sensors")]
-        List<Sensor> sensors = new List<Sensor>();
+        [DataMember(Name = "sensors")] 
+        public List<Sensor> sensors = new List<Sensor>();
 
         public void passData(String data)
         {
