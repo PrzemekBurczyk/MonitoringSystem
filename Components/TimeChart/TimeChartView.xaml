@@ -36,15 +36,20 @@
                 <TextBlock Text="100%" FontFamily="Segoe UI Light" Foreground="#FF707070" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
             </Grid>
 
-            <chart:SparrowChart Grid.Row="1" RenderingMode="WritableBitmap" ContainerBorderStyle="{StaticResource containerStyle}">
+            <chart:SparrowChart Name="Chart" Grid.Row="1" RenderingMode="WritableBitmap" ContainerBorderStyle="{StaticResource containerStyle}">
                 <chart:SparrowChart.XAxis>
-                    <chart:DateTimeXAxis Interval="0:0:1" CrossLineStyle="{StaticResource crossLineStyle}" Visibility="Collapsed"/>
+                    <chart:DateTimeXAxis Name="XAxis" Interval="0:0:1" CrossLineStyle="{StaticResource crossLineStyle}" Visibility="Collapsed"/>
                 </chart:SparrowChart.XAxis>
                 <chart:SparrowChart.YAxis>
                     <chart:LinearYAxis Name="YAxis" MinValue="0" MaxValue="100" CrossLineStyle="{StaticResource crossLineStyle}" Interval="10" Visibility="Collapsed"/>
                 </chart:SparrowChart.YAxis>
-                <chart:AreaSeries XPath="Time" Stroke="#FF117DBB" StrokeThickness="1" YPath="Value" Fill="#11117DBB" PointsSource="{Binding Data}"/>
-                <!--<chart:AreaSeries XPath="Time" Stroke="#FFFF0000" StrokeThickness="1" YPath="MemoryUsage" Fill="#11117DBB" PointsSource="{Binding CPU}"/>-->
+                <chart:AreaSeries XPath="Time" Stroke="Red" StrokeThickness="1" YPath="Value" Fill="#00000000"/>
+                <chart:AreaSeries XPath="Time" Stroke="Blue" StrokeThickness="1" YPath="Value" Fill="#00000000"/>
+                <chart:AreaSeries XPath="Time" Stroke="Green" StrokeThickness="1" YPath="Value" Fill="#00000000"/>
+                <chart:AreaSeries XPath="Time" Stroke="Gray" StrokeThickness="1" YPath="Value" Fill="#00000000"/>
+                <chart:AreaSeries XPath="Time" Stroke="Gold" StrokeThickness="1" YPath="Value" Fill="#00000000"/>
+                <chart:AreaSeries XPath="Time" Stroke="Violet" StrokeThickness="1" YPath="Value" Fill="#00000000"/>
+                <chart:AreaSeries XPath="Time" Stroke="Orange" StrokeThickness="1" YPath="Value" Fill="#00000000"/>
             </chart:SparrowChart>
 
             <Grid Grid.Row="2">

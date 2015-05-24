@@ -13,11 +13,11 @@ namespace Components.TimeChart
 {
     public class ViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Model> Data { get; set; }
+        public Dictionary<int, ObservableCollection<Model>> Data { get; set; }
 
         public ViewModel()
         {
-            Data = new ObservableCollection<Model>();
+            Data = new Dictionary<int, ObservableCollection<Model>>();
         }
 
         private void OnPropertyChanged(PropertyChangedEventArgs args)
