@@ -60,10 +60,8 @@ namespace Core
 
         public string readMessage()
         {
-            byte[] message = new byte[4096];
-            int bytesRead;
-
-            bytesRead = 0;
+            byte[] message = new byte[4096], tmpMessage = new byte[4096], msgLengthBuff = new byte[4];
+            int bytesRead = 0, msgLength=0;
 
             bytesRead = clientStream.Read(message, 0, 4096);
 
@@ -73,9 +71,26 @@ namespace Core
                 throw new IOException();
             }
 
+            msgLengthBuff = message.Take<byte>(4).ToArray();
+            message = message.Skip<byte>(4).ToArray();
+            bytesRead -= 4;
+
+            if (BitConverter.IsLittleEndian)
+                Array.Reverse(msgLengthBuff);
+
+            msgLength = BitConverter.ToInt32(msgLengthBuff, 0);
+
+            while( bytesRead < msgLength)
+            {
+                int tmpBytesRead = clientStream.Read(tmpMessage, 0, 4096);
+                Array.Copy(tmpMessage, 0, message, bytesRead, tmpBytesRead);
+                bytesRead += tmpBytesRead;
+            }            
+
             //message has successfully been received
             ASCIIEncoding encoder = new ASCIIEncoding();
-            return encoder.GetString(message, 0, bytesRead);
+            string resultMsg = encoder.GetString(message, 0, bytesRead);
+            return resultMsg;
         }
 
         public void WriteMessage(String message)
