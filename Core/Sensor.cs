@@ -13,10 +13,10 @@ namespace Core
     public class Sensor
     {
         [DataMember]
-        int id;
+        public int Id { get; set; }
 
         [DataMember]
-        String name;
+        public String name { get; set; }
 
         [DataMember]
         public string description;

@@ -75,10 +75,16 @@
                 <DataGridTemplateColumn Header="Sensors" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" >
-                                <CheckBox Style="{StaticResource TreeExpanderStyle}" IsChecked="{Binding IsExpanded, Mode=TwoWay}"/>
-                                <TextBlock Text="{Binding Sensors}" Margin="4" />
-                            </StackPanel>
+                            <ItemsControl ItemsSource="{Binding sensors}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding name}" Margin="4" />
+                                            <Button Content="Button" Margin="4" Click="Button_Toggle_Clicked" Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=ItemsControl}}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

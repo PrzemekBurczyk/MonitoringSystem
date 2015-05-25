@@ -72,5 +72,15 @@ namespace Core
                 placeholder.sendDataBack();
             }
         }
+
+        private void Button_Toggle_Clicked(object sender, RoutedEventArgs e)
+        {
+            FrameworkElement fe = sender as FrameworkElement;
+            Sensor clickedSensor = ((Sensor)fe.DataContext);
+
+            ClientObject co = (ClientObject)fe.Tag;
+
+            co.toggleTransmission(clickedSensor.Id);
+        } 
     }
 }

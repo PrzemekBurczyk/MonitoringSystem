@@ -31,8 +31,6 @@ namespace Core
             MemoryStream ms = new MemoryStream(System.Text.ASCIIEncoding.ASCII.GetBytes(clientJsonData));
             ClientObject clientData = (ClientObject)serializer.ReadObject(ms);
 
-            WriteMessage("OK");
-
             return clientData;
         }
 
@@ -97,7 +95,12 @@ namespace Core
         {
             ASCIIEncoding encoder = new ASCIIEncoding();
             byte[] responseMessage = encoder.GetBytes(message);
-            clientStream.Write(responseMessage, 0, responseMessage.Length);
+            int length = responseMessage.Length;
+            byte[] msgLengthBuffer = BitConverter.GetBytes(length);
+
+            byte[] concatenatedBuff = msgLengthBuffer.Concat(responseMessage).ToArray();
+
+            clientStream.Write(concatenatedBuff, 0, concatenatedBuff.Length);            
         }
     } 
 }

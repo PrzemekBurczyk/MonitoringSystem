@@ -23,7 +23,18 @@ namespace Core
         public ClientConnection clientConnection;
 
         [DataMember(Name = "sensors")] 
-        public List<Sensor> sensors = new List<Sensor>();
+        private List<Sensor> sensorsList = new List<Sensor>();
+        public List<Sensor> sensors
+        {
+            get
+            {
+                return sensorsList;
+            }
+            set
+            {
+                sensorsList = value;
+            }
+        }
 
         public void passData(String data)
         {
@@ -34,7 +45,7 @@ namespace Core
 
         public void toggleTransmission(int sensorId)
         {
-            clientConnection.WriteMessage("Transmission toggled for sensor "  + sensorId.ToString() + "\n");
+            clientConnection.WriteMessage("{sensorsToUpdate: {"  + sensorId.ToString() + ": true}}");
         }
 
         public void sendDataBack()
