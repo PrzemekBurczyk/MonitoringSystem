@@ -98,6 +98,9 @@ namespace Core
             int length = responseMessage.Length;
             byte[] msgLengthBuffer = BitConverter.GetBytes(length);
 
+            if (BitConverter.IsLittleEndian)
+                Array.Reverse(msgLengthBuffer);
+
             byte[] concatenatedBuff = msgLengthBuffer.Concat(responseMessage).ToArray();
 
             clientStream.Write(concatenatedBuff, 0, concatenatedBuff.Length);            

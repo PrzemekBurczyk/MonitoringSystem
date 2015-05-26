@@ -80,7 +80,7 @@ namespace Core
 
             ClientObject co = (ClientObject)fe.Tag;
 
-            co.toggleTransmission(clickedSensor.Id);
+            co.toggleTransmission(clickedSensor.id);
         } 
     }
 }

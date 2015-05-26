@@ -45,7 +45,7 @@ namespace Core
 
         public void toggleTransmission(int sensorId)
         {
-            clientConnection.WriteMessage("{sensorsToUpdate: {"  + sensorId.ToString() + ": true}}");
+            clientConnection.WriteMessage("{\"sensorsToUpdate\":{\""  + sensorId.ToString() + "\":true}}");
         }
 
         public void sendDataBack()
