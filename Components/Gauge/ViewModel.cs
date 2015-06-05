@@ -13,27 +13,41 @@ namespace Components.Gauge
 {
     public class ViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        public EventHandler OnScoreChanged;
 
         private int score;
         public int Score
         {
             get { return score; }
-            set { score = value; OnPropertyChanged(new PropertyChangedEventArgs("Score")); }
+            set {
+                if (value != score)
+                {
+                    score = value;
+                    OnPropertyChanged("Score");
+                    if (OnScoreChanged != null)
+                    {
+                        OnScoreChanged(this, EventArgs.Empty);
+                    }
+                }
+     
+            }
         }
 
         public ViewModel()
         {
-            Score = 500;
+            Score = 0;
         }
 
-        private void OnPropertyChanged(PropertyChangedEventArgs args)
+        private void OnPropertyChanged(string p)
         {
-            if (this.PropertyChanged != null)
+            PropertyChangedEventHandler handler = PropertyChanged;
+
+            if (handler != null)
             {
-                this.PropertyChanged(this, args);
+                handler(this, new PropertyChangedEventArgs(p));
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

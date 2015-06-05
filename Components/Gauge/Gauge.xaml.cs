@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuiComponentInterfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,16 +19,28 @@ namespace Components.Gauge
     /// <summary>
     /// Interaction logic for Gauge.xaml
     /// </summary>
-    public partial class Gauge : UserControl
+    public partial class Gauge : UserControl, IGuiComponent
     {
 
-        public int Score = 400;
+        private ViewModel ViewModel { get; set; }
 
         public Gauge()
         {
             InitializeComponent();
+            ViewModel = (ViewModel)MainGrid.DataContext;
+        }
 
-            
+        public DataType[] GetTypes()
+        {
+            return new DataType[] { DataType.INTEGER };
+        }
+
+        public void AddValue(DataValue dataValue)
+        {
+            if (dataValue.Type == DataType.INTEGER)
+            {
+                ViewModel.Score = Int32.Parse(dataValue.Value);                
+            }
         }
     }
 }
