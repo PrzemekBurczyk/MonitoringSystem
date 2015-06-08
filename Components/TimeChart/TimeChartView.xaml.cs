@@ -31,6 +31,9 @@ namespace Components.TimeChart
 
         private int currentSeries = 0;
 
+        private double minVal = 0.0;
+        private double maxVal = 0.0;
+
         public TimeChartView()
         {
             InitializeComponent();
@@ -65,7 +68,8 @@ namespace Components.TimeChart
 
         void TimeChartView_Loaded(object sender, RoutedEventArgs e)
         {
-            ViewModel = (ViewModel) MainGrid.DataContext;
+            ViewModel = (ViewModel)MainGrid.DataContext;
+
             //RunDemo();
         }
 
@@ -76,13 +80,24 @@ namespace Components.TimeChart
 
         public void AddValue(DataValue dataValue)
         {
-            if(GetTypes().Contains(dataValue.Type)){
+            if (GetTypes().Contains(dataValue.Type))
+            {
                 if (dataValue.Type == DataType.INTEGER)
                 {
                     Model model = new Model();
                     model.DataSeriesId = dataValue.DataSeriesId;
                     model.Time = new DateTime(dataValue.Timestamp);
                     model.Value = Double.Parse(dataValue.Value);
+
+                    if (model.Value > maxVal)
+                    {
+                        maxVal = model.Value;
+                    }
+
+                    if (model.Value < minVal)
+                    {
+                        minVal = model.Value;
+                    }
 
                     if (!ViewModel.Data.ContainsKey(model.DataSeriesId))
                     {
@@ -107,7 +122,17 @@ namespace Components.TimeChart
 
                     data.Add(model);
 
-                    foreach(ObservableCollection<Model> collection in ViewModel.Data.Values){
+                    if (data.Count >= 2)
+                    {
+                        YAxis.MaxValue = maxVal.ToString();
+                        YAxis.MinValue = minVal.ToString();
+
+                        MaxValLabel.Text = maxVal.ToString();
+                        MinValLabel.Text = minVal.ToString();
+                    }
+
+                    foreach (ObservableCollection<Model> collection in ViewModel.Data.Values)
+                    {
                         if (collection != data)
                         {
                             if (collection.Count >= 60)
@@ -115,9 +140,15 @@ namespace Components.TimeChart
                                 collection.RemoveAt(0);
                             }
 
-                            Model last = collection.Last();
-                            last.Time = model.Time;
-                            collection.Add(last);
+                            if (collection.Count > 0)
+                            {
+                                Model last = collection.Last();
+                                Model toAdd = new Model();
+                                toAdd.DataSeriesId = last.DataSeriesId;
+                                toAdd.Value = last.Value;
+                                toAdd.Time = model.Time;
+                                collection.Add(toAdd);
+                            }
                         }
                     }
                 }
@@ -130,8 +161,8 @@ namespace Components.TimeChart
             areaSeries.PointsSource = ViewModel.Data[id];
             areaSeries.XPath = "Time";
             areaSeries.YPath = "Value";
-            areaSeries.Stroke = new SolidColorBrush((Color) ColorConverter.ConvertFromString("#FF117DBB"));
-            areaSeries.Fill = new SolidColorBrush((Color) ColorConverter.ConvertFromString("#11117DBB"));
+            areaSeries.Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF117DBB"));
+            areaSeries.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#11117DBB"));
             areaSeries.StrokeThickness = 1.0;
             Chart.Series.Add(areaSeries);
         }

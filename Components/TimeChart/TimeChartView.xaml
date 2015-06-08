@@ -33,7 +33,7 @@
             <Grid Grid.Row="0">
                 <TextBlock Text="Title" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                 <TextBlock Text="% Utilization" FontFamily="Segoe UI Light" Foreground="#FF707070" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
-                <TextBlock Text="100%" FontFamily="Segoe UI Light" Foreground="#FF707070" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+                <TextBlock Name="MaxValLabel" Text="100%" FontFamily="Segoe UI Light" Foreground="#FF707070" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
             </Grid>
 
             <chart:SparrowChart Name="Chart" Grid.Row="1" RenderingMode="WritableBitmap" ContainerBorderStyle="{StaticResource containerStyle}">
@@ -53,7 +53,7 @@
             </chart:SparrowChart>
 
             <Grid Grid.Row="2">
-                <TextBlock Text="0%" FontFamily="Segoe UI Light" Foreground="#FF707070" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+                <TextBlock Name="MinValLabel" Text="0%" FontFamily="Segoe UI Light" Foreground="#FF707070" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
             </Grid>
         </Grid>
     </Grid>

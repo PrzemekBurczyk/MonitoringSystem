@@ -17,9 +17,8 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         
-        <cpu:CPUView Grid.Row="0" Grid.Column="0"/>
-        <timechart:TimeChartView Grid.Row="0" Grid.Column="1"/>
-        <gauge:Gauge Grid.Row="1" Grid.Column="0"/>
-        <richConsole:RichConsole Grid.Row="1" Grid.Column="1"/>
+        <timechart:TimeChartView Grid.Row="0" Grid.ColumnSpan="2"/>
+        <gauge:Gauge Grid.Row="1" Grid.Column="1"/>
+        <richConsole:RichConsole Grid.Row="1" Grid.Column="0"/>
     </Grid>
 </UserControl>
