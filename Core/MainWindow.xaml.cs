@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Components.Gauge;
+using Components.RichConsole;
+using GuiComponentInterfaces;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -30,6 +33,8 @@ namespace Core
             set { clientObjectManager = value; }
         }
 
+        public List<IGuiComponent> components = new List<IGuiComponent>();
+
         //public ICollectionView ClientObjectCollection { get; set; }
         public ObservableCollection<ClientObject> ClientObjectCollection { get; set; }
 
@@ -46,6 +51,15 @@ namespace Core
             //automatyczne nasłuchiwanie przy starcie aplikacji
             //serverCommunicationManager.Start();
             //ToggleButton.IsEnabled = true;
+
+            Gauge gauge = new Gauge();
+            components.Add(gauge);        
+            gridMain.Children.Add(gauge);
+
+            //RichConsole console = new RichConsole();
+            //components.Add(console);
+
+            //gridMain.Children.Add(console);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -54,29 +68,12 @@ namespace Core
             //ToggleButton.IsEnabled = true;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            //Run this only after connection and receiving initial data from Client
-            ClientObject placeholder = clientObjectManager.get(0);
-            if (placeholder != null)
-            {
-                placeholder.toggleTransmission(1);
-            }
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            ClientObject placeholder = clientObjectManager.get(0);
-            if (placeholder != null)
-            {
-                placeholder.sendDataBack();
-            }
-        }
-
         private void Button_Toggle_Clicked(object sender, RoutedEventArgs e)
         {
             FrameworkElement fe = sender as FrameworkElement;
             Sensor clickedSensor = ((Sensor)fe.DataContext);
+
+            clickedSensor.GuiComponent = components[0];
 
             ClientObject co = (ClientObject)fe.Tag;
 
