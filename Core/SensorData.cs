@@ -11,8 +11,10 @@ namespace Core
     [DataContract]
     class SensorData
     {
-        [DataMember(Name = "sensors")]
+        
         private Dictionary<int, SingleSensorData> sensorsDictionary = new Dictionary<int, SingleSensorData>();
+
+        [DataMember(Name = "sensors")]
         public Dictionary<int, SingleSensorData> SensorsDictionary
         {
             get
@@ -26,12 +28,13 @@ namespace Core
         }
     }
 
+    [DataContract]
     class SingleSensorData
     {
-        public int Id { get; set; }
-
+        [DataMember(Name="value")]
         public string Value { get; set; }
 
+        [DataMember(Name = "timestamp")]
         public string Timestamp { get; set; }
 
         public DataValue getDataValue()

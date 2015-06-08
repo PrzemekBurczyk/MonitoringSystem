@@ -16,6 +16,8 @@ namespace Core
 
         public ClientDataReceivedDelegate onDataReceived;
 
+        public byte[] receivedDataLeftovers;
+
         public ClientConnection(TcpClient client)
         {
             tcpClient = client;
@@ -69,6 +71,15 @@ namespace Core
                 throw new IOException();
             }
 
+            if (receivedDataLeftovers != null && receivedDataLeftovers.Length > 0)
+            {
+                byte[] messageWithPreviousReceived = new byte[bytesRead + receivedDataLeftovers.Length];
+                Array.Copy(receivedDataLeftovers, messageWithPreviousReceived, receivedDataLeftovers.Length);
+                Array.Copy(message, 0, messageWithPreviousReceived, receivedDataLeftovers.Length, bytesRead);
+                message = messageWithPreviousReceived;
+            }
+            
+
             msgLengthBuff = message.Take<byte>(4).ToArray();
             message = message.Skip<byte>(4).ToArray();
             bytesRead -= 4;
@@ -83,11 +94,19 @@ namespace Core
                 int tmpBytesRead = clientStream.Read(tmpMessage, 0, 4096);
                 Array.Copy(tmpMessage, 0, message, bytesRead, tmpBytesRead);
                 bytesRead += tmpBytesRead;
-            }            
+            }
+
+            if (bytesRead > msgLength)
+            {
+                receivedDataLeftovers = new byte[bytesRead - msgLength];
+                Array.Copy(message, msgLength, receivedDataLeftovers, 0, bytesRead - msgLength);
+
+                message = message.Take<byte>(msgLength).ToArray();
+            }
 
             //message has successfully been received
             ASCIIEncoding encoder = new ASCIIEncoding();
-            string resultMsg = encoder.GetString(message, 0, bytesRead);
+            string resultMsg = encoder.GetString(message, 0, msgLength);
             return resultMsg;
         }
 

@@ -38,17 +38,27 @@ namespace Core
 
         public void passData(String data)
         {
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(SensorData));
+            DataContractJsonSerializerSettings settings = new DataContractJsonSerializerSettings();
+                settings.UseSimpleDictionaryFormat = true;
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(SensorData), settings);
             MemoryStream ms = new MemoryStream(System.Text.ASCIIEncoding.ASCII.GetBytes(data));
             SensorData sensorData = (SensorData)serializer.ReadObject(ms);
 
             foreach (Sensor sensor in sensors)
             {
-                SingleSensorData singleSensorData = sensorData.SensorsDictionary[sensor.id];
-                if (singleSensorData != null)
+                try
                 {
-                    sensor.AddValue( singleSensorData.getDataValue() );
+                    SingleSensorData singleSensorData = sensorData.SensorsDictionary[sensor.id];
+                    if (singleSensorData != null)
+                    {
+                        sensor.AddValue(singleSensorData.getDataValue());
+                    }
                 }
+                catch (KeyNotFoundException e)
+                {
+                    continue;
+                }
+                
             }
         }
 
