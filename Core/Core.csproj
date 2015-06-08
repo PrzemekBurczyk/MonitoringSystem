@@ -61,6 +61,7 @@
     <Compile Include="DispatchingObservableCollection.cs" />
     <Compile Include="Sensor.cs" />
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="SensorData.cs" />
     <Compile Include="ServerCommunicationManager.cs" />
     <Page Include="ClientsDataGrid.xaml">
       <SubType>Designer</SubType>

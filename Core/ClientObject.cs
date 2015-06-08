@@ -38,9 +38,18 @@ namespace Core
 
         public void passData(String data)
         {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(SensorData));
+            MemoryStream ms = new MemoryStream(System.Text.ASCIIEncoding.ASCII.GetBytes(data));
+            SensorData sensorData = (SensorData)serializer.ReadObject(ms);
 
-
-            Console.WriteLine("Passing data to sensors : " + data);
+            foreach (Sensor sensor in sensors)
+            {
+                SingleSensorData singleSensorData = sensorData.SensorsDictionary[sensor.id];
+                if (singleSensorData != null)
+                {
+                    sensor.AddValue( singleSensorData.getDataValue() );
+                }
+            }
         }
 
         public void toggleTransmission(int sensorId)

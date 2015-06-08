@@ -35,6 +35,19 @@ namespace Core
             }
         }
 
-        IGuiComponent guiComponent;
+        public IGuiComponent GuiComponent { get; set; }
+        public int DataSeriesId { get; set; }
+
+        public void AddValue(DataValue val)
+        {
+            if (GuiComponent == null)
+            {
+                Console.WriteLine("Passing data : " + val.Value.ToString() + ", but component is null!!!");
+                return;
+            }
+
+            val.DataSeriesId = DataSeriesId;
+            GuiComponent.AddValue(val);
+        }
     }
 }
