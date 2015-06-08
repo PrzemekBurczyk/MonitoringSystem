@@ -25,13 +25,15 @@ namespace Core
 
         private DataType _typeVal;
 
+        
         public DataType TypeVal
         {
             get { return _typeVal; }
             set { _typeVal = value; }
         }
-        [DataMember]
-        string type
+
+        [DataMember(Name = "dataType")]
+        public string type
         {
             get
             {
@@ -55,6 +57,7 @@ namespace Core
             }
 
             val.DataSeriesId = DataSeriesId;
+            val.Type = TypeVal;
             GuiComponent.AddValue(val);
         }
     }
