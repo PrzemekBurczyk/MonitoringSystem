@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,20 +19,27 @@ namespace Core
         [DataMember]
         public String name { get; set; }
 
+
         [DataMember]
         public string description;
 
-        private DataType typeVal;
+        private DataType _typeVal;
+
+        public DataType TypeVal
+        {
+            get { return _typeVal; }
+            set { _typeVal = value; }
+        }
         [DataMember]
         string type
         {
             get
             {
-                return typeVal.ToString();
+                return _typeVal.ToString();
             }
             set
             {
-                this.typeVal = (DataType)Enum.Parse(typeof(DataType), value, true);
+                this._typeVal = (DataType)Enum.Parse(typeof(DataType), value, true);
             }
         }
 
