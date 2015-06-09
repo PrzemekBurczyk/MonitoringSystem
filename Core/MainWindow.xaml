@@ -75,8 +75,7 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
-                                            <TextBlock Text="{Binding name}" Margin="4" />
-                                            <Button Content="Button" Margin="4" Click="Button_Toggle_Clicked" Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=ItemsControl}}"/>
+                                            <Button Content="{Binding name}" Margin="4" Click="Button_Toggle_Clicked" Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=ItemsControl}}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
