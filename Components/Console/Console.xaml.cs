@@ -69,7 +69,7 @@ namespace Components.Console
 
         private void OnConsoleTextChanged(object sender, EventArgs eventArgs)
         {
-            textBox.ScrollToEnd();
+            Dispatcher.Invoke((Action)(() => { textBox.ScrollToEnd(); }));
         }
 
         public DataType[] GetTypes()
