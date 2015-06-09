@@ -33,7 +33,7 @@ namespace Core
             set { clientObjectManager = value; }
         }
 
-        public List<IGuiComponent> components = new List<IGuiComponent>();
+        public ObservableCollection<IGuiComponent> Components { get; set; }
 
         //public ICollectionView ClientObjectCollection { get; set; }
         public ObservableCollection<ClientObject> ClientObjectCollection { get; set; }
@@ -42,6 +42,8 @@ namespace Core
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
+
+            Components = new ObservableCollection<IGuiComponent>();
 
             //clientObjectManager = new ClientObjectManager();
             //ClientObjectCollection = new ObservableCollection<ClientObject> { new ClientObject("Pepper"), new ClientObject("Zoe") };
@@ -52,17 +54,15 @@ namespace Core
             //serverCommunicationManager.Start();
             //ToggleButton.IsEnabled = true;
 
-            //Gauge gauge = new Gauge();
-            //components.Add(gauge);        
-            //gridMain.Children.Add(gauge);
+            Gauge gauge = new Gauge();
+            Components.Add(gauge);
+            gridMain.Children.Add(gauge);
+            Grid.SetColumn(gauge, 0);
 
             Components.Console.Console console = new Components.Console.Console();
-            components.Add(console);
-
-            //Components.RichConsole.RichConsole console = new Components.RichConsole.RichConsole();
-            //components.Add(console);
-
+            Components.Add(console);
             gridMain.Children.Add(console);
+            Grid.SetColumn(console, 1);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -76,10 +76,20 @@ namespace Core
             FrameworkElement fe = sender as FrameworkElement;
             Sensor clickedSensor = ((Sensor)fe.DataContext);
             clickedSensor.SensorClicked = true;
-            clickedSensor.GuiComponent = components[0];
 
             ClientObject co = (ClientObject)fe.Tag;
 
-        } 
+            co.toggleTransmission(clickedSensor.id);
+        }
+
+        private void Combo_On_Change(object sender, RoutedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            Sensor cntSensor = comboBox.DataContext as Sensor;
+
+            cntSensor.GuiComponent = comboBox.SelectedItem as IGuiComponent;
+
+            System.Console.WriteLine("asdf");
+        }
     }
 }

@@ -74,6 +74,15 @@ namespace Components.Console
 
         public string DataTypesStr { get; set; }
 
+        public string ComponentDisplayName
+        {
+            get
+            {
+                return "Console";
+            }
+            set {}
+        }
+
         public DataType[] GetTypes()
         {
             return new DataType[] { DataType.TEXT, DataType.INTEGER };

@@ -32,6 +32,15 @@ namespace Components.Gauge
 
         public string DataTypesStr { get; set; }
 
+        public string ComponentDisplayName
+        {
+            get
+            {
+                return "Gauge";
+            }
+            set { }
+        }
+
         public DataType[] GetTypes()
         {
             return new DataType[] { DataType.INTEGER };
