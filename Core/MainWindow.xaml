@@ -7,6 +7,8 @@
         xmlns:controls="clr-namespace:Components;assembly=Components"
         Title="MainWindow" Width="900" Height="600">
     <Window.Resources>
+        <loc:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <loc:MainWindow x:Key="MainWindow"/>
         <Style x:Key="TreeExpanderStyle" TargetType="CheckBox">
             <Setter Property="Background" Value="#FF448DCA"/>
             <Setter Property="Foreground" Value="#FF000000"/>
@@ -76,6 +78,7 @@
                                     <DataTemplate>
                                         <StackPanel>
                                             <Button Content="{Binding name}" Margin="4" Click="Button_Toggle_Clicked" Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=ItemsControl}}"/>
+                                            <ComboBox x:Name="Combo" Visibility="{Binding SensorClicked, Converter={StaticResource BoolToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=ItemsControl}}" ItemsSource="{Binding Path=components}" DisplayMemberPath="DataTypesStr" SelectedValuePath="DataTypesStr" SelectedValue="{Binding Path=IGuiComponent}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>

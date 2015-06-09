@@ -19,6 +19,8 @@ namespace Core
         [DataMember]
         public String name { get; set; }
 
+        public bool SensorClicked { get; set; }
+
 
         [DataMember]
         public string description;

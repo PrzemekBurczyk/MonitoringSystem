@@ -75,12 +75,11 @@ namespace Core
         {
             FrameworkElement fe = sender as FrameworkElement;
             Sensor clickedSensor = ((Sensor)fe.DataContext);
-
+            clickedSensor.SensorClicked = true;
             clickedSensor.GuiComponent = components[0];
 
             ClientObject co = (ClientObject)fe.Tag;
 
-            co.toggleTransmission(clickedSensor.id);
         } 
     }
 }

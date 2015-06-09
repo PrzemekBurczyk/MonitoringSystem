@@ -30,6 +30,8 @@ namespace Components.Gauge
             ViewModel = (ViewModel)MainGrid.DataContext;
         }
 
+        public string DataTypesStr { get; set; }
+
         public DataType[] GetTypes()
         {
             return new DataType[] { DataType.INTEGER };
@@ -41,6 +43,17 @@ namespace Components.Gauge
             {
                 ViewModel.Score = Int32.Parse(dataValue.Value);                
             }
+        }
+
+        public string typesToString()
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (DataType dt in GetTypes())
+            {
+                builder.Append(dt.ToString());
+            }
+            DataTypesStr = builder.ToString();
+            return builder.ToString();
         }
     }
 }

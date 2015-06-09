@@ -55,6 +55,8 @@ namespace Components.RichConsole
         //    AddValue(dv);
         //}
 
+        public string DataTypesStr { get; set; }
+
         public DataType[] GetTypes()
         {
             return new DataType[] { DataType.TEXT, DataType.INTEGER };
@@ -87,6 +89,17 @@ namespace Components.RichConsole
             {
                 return Brushes.Red;
             }
+        }
+
+        public string typesToString()
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (DataType dt in GetTypes())
+            {
+                builder.Append(dt.ToString());
+            }
+            DataTypesStr = builder.ToString();
+            return builder.ToString();
         }
     }
 }

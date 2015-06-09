@@ -73,6 +73,8 @@ namespace Components.TimeChart
             //RunDemo();
         }
 
+        public string DataTypesStr { get; set; }
+
         public DataType[] GetTypes()
         {
             return new DataType[] { DataType.INTEGER };
@@ -153,6 +155,17 @@ namespace Components.TimeChart
                     }
                 }
             }
+        }
+
+        public string typesToString()
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (DataType dt in GetTypes())
+            {
+                builder.Append(dt.ToString());
+            }
+            DataTypesStr = builder.ToString();
+            return builder.ToString();
         }
 
         private void AddSeries(int id)
