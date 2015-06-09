@@ -1,5 +1,5 @@
 ﻿using Components.Gauge;
-using Components.RichConsole;
+using Components.Console;
 using GuiComponentInterfaces;
 using System;
 using System.Collections.Generic;
@@ -52,14 +52,17 @@ namespace Core
             //serverCommunicationManager.Start();
             //ToggleButton.IsEnabled = true;
 
-            Gauge gauge = new Gauge();
-            components.Add(gauge);        
-            gridMain.Children.Add(gauge);
+            //Gauge gauge = new Gauge();
+            //components.Add(gauge);        
+            //gridMain.Children.Add(gauge);
 
-            //RichConsole console = new RichConsole();
+            Components.Console.Console console = new Components.Console.Console();
+            components.Add(console);
+
+            //Components.RichConsole.RichConsole console = new Components.RichConsole.RichConsole();
             //components.Add(console);
 
-            //gridMain.Children.Add(console);
+            gridMain.Children.Add(console);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
