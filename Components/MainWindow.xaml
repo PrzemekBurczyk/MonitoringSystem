@@ -10,15 +10,25 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        
-        <timechart:TimeChartView Grid.Row="0" Grid.ColumnSpan="2"/>
-        <gauge:Gauge Grid.Row="1" Grid.Column="1"/>
-        <richConsole:RichConsole Grid.Row="1" Grid.Column="0"/>
+
+        <timechart:TimeChartView Grid.Row="0" Grid.ColumnSpan="3"/>
+        <gauge:Gauge Grid.Row="2" Grid.Column="0"/>
+        <GridSplitter HorizontalAlignment="Right" 
+                  VerticalAlignment="Stretch" Grid.Row="2"
+                  Grid.Column="1" ResizeBehavior="PreviousAndNext"
+                  ResizeDirection="Columns" Width="5" Background="#FFBCBCBC"/>
+        <GridSplitter HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Top" Grid.Row="1"
+                  Grid.ColumnSpan="3" ResizeBehavior="PreviousAndNext"
+                  ResizeDirection="Rows" Height="5" Background="#FFBCBCBC"/>
+        <richConsole:RichConsole Grid.Row="2" Grid.Column="2"/>
     </Grid>
 </UserControl>
