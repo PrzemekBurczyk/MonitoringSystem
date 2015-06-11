@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,13 +15,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Components.Annotations;
 
 namespace Components.Console
 {
     /// <summary>
     /// Interaction logic for Console.xaml
     /// </summary>
-    public partial class Console : UserControl, IGuiComponent
+    public partial class Console : UserControl, IGuiComponent, INotifyPropertyChanged
     {
         private ViewModel ViewModel { get; set; }
 
@@ -65,6 +67,7 @@ namespace Components.Console
         {
             ViewModel = (ViewModel)MainGrid.DataContext;
             ViewModel.OnConsoleTextChanged += new EventHandler(OnConsoleTextChanged);
+            State = false;
         }
 
         private void OnConsoleTextChanged(object sender, EventArgs eventArgs)
@@ -83,6 +86,18 @@ namespace Components.Console
             set {}
         }
 
+        private bool _state;
+
+        public bool State
+        {
+            get { return _state; }
+            set
+            {
+                _state = value;
+                OnPropertyChanged("State");
+            }
+        }
+
         public DataType[] GetTypes()
         {
             return new DataType[] { DataType.TEXT, DataType.INTEGER };
@@ -93,15 +108,13 @@ namespace Components.Console
             addData(new DateTime(dataValue.Timestamp).ToLongTimeString() + " - " + dataValue.Value);
         }
 
-        public string typesToString()
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            StringBuilder builder = new StringBuilder();
-            foreach (DataType dt in GetTypes())
-            {
-                builder.Append(dt.ToString());
-            }
-            DataTypesStr = builder.ToString();
-            return builder.ToString();
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

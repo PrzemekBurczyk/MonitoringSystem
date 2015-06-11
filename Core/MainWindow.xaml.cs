@@ -35,7 +35,6 @@ namespace Core
 
         public ObservableCollection<IGuiComponent> Components { get; set; }
 
-        //public ICollectionView ClientObjectCollection { get; set; }
         public ObservableCollection<ClientObject> ClientObjectCollection { get; set; }
 
         public MainWindow()
@@ -44,15 +43,6 @@ namespace Core
             DataContext = new MainWindowViewModel();
 
             Components = new ObservableCollection<IGuiComponent>();
-
-            //clientObjectManager = new ClientObjectManager();
-            //ClientObjectCollection = new ObservableCollection<ClientObject> { new ClientObject("Pepper"), new ClientObject("Zoe") };
-
-            //serverCommunicationManager = new ServerCommunicationManager(clientObjectManager);
-
-            //automatyczne nasłuchiwanie przy starcie aplikacji
-            //serverCommunicationManager.Start();
-            //ToggleButton.IsEnabled = true;
 
             Gauge gauge = new Gauge();
             Components.Add(gauge);
@@ -63,12 +53,6 @@ namespace Core
             Components.Add(console);
             gridMain.Children.Add(console);
             Grid.SetColumn(console, 1);
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //serverCommunicationManager.Start();
-            //ToggleButton.IsEnabled = true;
         }
 
         private void Button_Toggle_Clicked(object sender, RoutedEventArgs e)

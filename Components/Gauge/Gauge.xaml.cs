@@ -1,7 +1,9 @@
 ﻿using GuiComponentInterfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,13 +15,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Components.Annotations;
 
 namespace Components.Gauge
 {
     /// <summary>
     /// Interaction logic for Gauge.xaml
     /// </summary>
-    public partial class Gauge : UserControl, IGuiComponent
+    public partial class Gauge : UserControl, IGuiComponent, INotifyPropertyChanged
     {
 
         private ViewModel ViewModel { get; set; }
@@ -28,10 +31,8 @@ namespace Components.Gauge
         {
             InitializeComponent();
             ViewModel = (ViewModel)MainGrid.DataContext;
+            State = false;
         }
-
-        public string DataTypesStr { get; set; }
-
         public string ComponentDisplayName
         {
             get
@@ -39,6 +40,18 @@ namespace Components.Gauge
                 return "Gauge";
             }
             set { }
+        }
+
+        private bool _state;
+
+        public bool State
+        {
+            get { return _state; }
+            set
+            {
+                _state = value;
+                OnPropertyChanged("State");
+            }
         }
 
         public DataType[] GetTypes()
@@ -54,15 +67,13 @@ namespace Components.Gauge
             }
         }
 
-        public string typesToString()
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            StringBuilder builder = new StringBuilder();
-            foreach (DataType dt in GetTypes())
-            {
-                builder.Append(dt.ToString());
-            }
-            DataTypesStr = builder.ToString();
-            return builder.ToString();
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

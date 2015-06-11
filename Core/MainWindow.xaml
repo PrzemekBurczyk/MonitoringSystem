@@ -5,6 +5,7 @@
         xmlns:cpu="clr-namespace:Components.CPUPerformance;assembly=Components"
         xmlns:loc="clr-namespace:Core" 
         xmlns:controls="clr-namespace:Components;assembly=Components"
+        xmlns:local="clr-namespace:Core"
         Title="MainWindow" Width="900" Height="600">
     <Window.Resources>
         <loc:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
@@ -58,16 +59,16 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="9*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DataGrid
+        <DataGrid 
             ItemsSource="{Binding ClientObjectManager.CustomCollection}"
-            AutoGenerateColumns="False" Grid.RowSpan="3" Margin="0,0,644.333,51.667">
+            AutoGenerateColumns="False" Grid.RowSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Clients" Binding="{Binding Name}" Width="*"/>
                 <DataGridTemplateColumn Header="Sensors" Width="*">
@@ -88,7 +89,8 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="499" Margin="254,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="615">
+        <local:ComponentsDataGrid Grid.Row="1"/>
+        <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="499" Grid.RowSpan="2" VerticalAlignment="Top" Width="615">
             <Viewbox StretchDirection="Both" Stretch="Uniform">
                 <Grid Name="gridMain">
                     <Grid.RowDefinitions>
@@ -100,7 +102,7 @@
                         <ColumnDefinition Width="500px" />
                     </Grid.ColumnDefinitions>
 
-                    
+
                 </Grid>
             </Viewbox>
         </Border>

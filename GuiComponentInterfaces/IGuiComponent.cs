@@ -8,15 +8,8 @@ namespace GuiComponentInterfaces
 {
     public interface IGuiComponent
     {
-        string DataTypesStr
-        {
-            get; set; 
-        }
-
-        DataType[] GetTypes();
-
+        String ComponentDisplayName { get; set; }
+        bool State { get; set; }
         void AddValue(DataValue dataValue);
-
-        String typesToString();
     }
 }
