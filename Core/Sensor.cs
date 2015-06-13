@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using GuiComponentInterfaces;
 using System.Runtime.Serialization;
+using System.Windows;
 
 namespace Core
 {
@@ -60,7 +61,10 @@ namespace Core
 
             val.DataSeriesId = DataSeriesId;
             val.Type = TypeVal;
-            GuiComponent.AddValue(val);
+
+            Application.Current.Dispatcher.Invoke(new Action(() => {
+                GuiComponent.AddValue(val);
+            }));
         }
     }
 }
