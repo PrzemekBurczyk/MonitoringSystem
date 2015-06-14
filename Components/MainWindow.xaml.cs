@@ -18,16 +18,40 @@ namespace Components
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : UserControl
+    public partial class MainWindow : Window
     {
+        private GridModifier gridModifier;
+
+        Stack<UIElement> elements;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            elements = new Stack<UIElement>();
+
+            gridModifier = new GridModifier(MainGrid);
         }
 
-        private void SampleUserControl_Loaded(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
+            UIElement element = new RichConsole.RichConsole();
+            if (gridModifier.AddComponentForCurrentSelection(element))
+            {
+                elements.Push(element);
+            }
+        }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                gridModifier.RemoveComponent(elements.Pop());
+            }
+            catch (InvalidOperationException ex)
+            {
+                System.Console.WriteLine("No element on the stack");
+            }
         }
     }
 }
