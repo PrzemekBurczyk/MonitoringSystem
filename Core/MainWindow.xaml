@@ -59,8 +59,10 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -90,6 +92,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <local:ComponentsDataGrid Grid.Row="1"/>
+        <Button Content="plepleple" Grid.Row="2"/>
+        <Button Content="trueueeu" Grid.Row="3"></Button>
         <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="499" Grid.RowSpan="2" VerticalAlignment="Top" Width="615">
             <Viewbox StretchDirection="Both" Stretch="Uniform">
                 <Grid Name="gridMain" Grid.Row="1">
