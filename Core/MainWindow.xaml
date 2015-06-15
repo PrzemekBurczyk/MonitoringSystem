@@ -118,7 +118,7 @@
         <Button Click="Add_Component_Button_Click" Content="Add" Grid.Row="2"/>
         <Button Click="Remove_Component_Button_Click" Content="Remove" Grid.Row="3"/>
 
-        <Grid Name="gridMain" Grid.Column="1" Grid.RowSpan="3">
+        <Grid Name="gridMain" Grid.Column="1" Grid.RowSpan="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
