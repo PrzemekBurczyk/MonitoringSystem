@@ -91,7 +91,29 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <local:ComponentsDataGrid Grid.Row="1"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid ItemsSource="{Binding AllComponents}" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Components" Binding="{Binding ComponentDisplayName}" Width="*"/>
+                </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <EventSetter Event="MouseDoubleClick" Handler="DataGrid_OnMouseDoublClick"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding State}" Value="false">
+                                <Setter Property="Background" Value="Gray"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding State}" Value="true">
+                                <Setter Property="Background" Value="GreenYellow"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+        </Grid>
         <Button Content="plepleple" Grid.Row="2"/>
         <Button Content="trueueeu" Grid.Row="3"></Button>
         <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="499" Grid.RowSpan="2" VerticalAlignment="Top" Width="615">

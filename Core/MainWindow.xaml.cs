@@ -116,5 +116,10 @@ namespace Core
                 System.Console.WriteLine("No element on the stack");
             }
         }
+
+        private void DataGrid_OnMouseDoublClick(object sender, MouseButtonEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
