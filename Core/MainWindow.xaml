@@ -81,7 +81,7 @@
                                     <DataTemplate>
                                         <StackPanel>
                                             <Button Content="{Binding name}" Margin="4" Click="Button_Toggle_Clicked" Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=ItemsControl}}"/>
-                                            <ComboBox x:Name="Combo" ItemsSource="{Binding Path=ComponentsList.Components, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" DisplayMemberPath="ComponentDisplayName" SelectedValuePath="{Binding Path=DataContext}" SelectionChanged="Combo_On_Change"/>
+                                            <ComboBox x:Name="Combo" ItemsSource="{Binding Path=ElementsCollection, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" DisplayMemberPath="ComponentDisplayName" SelectedValuePath="{Binding Path=DataContext}" SelectionChanged="Combo_On_Change"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>

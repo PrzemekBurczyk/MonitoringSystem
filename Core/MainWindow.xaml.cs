@@ -29,9 +29,8 @@ namespace Core
     {
         private GridModifier gridModifier;
 
-        Stack<UIElement> elements;
+        public ObservableCollection<IGuiComponent> ElementsCollection { get; set; }
 
-        public ICollectionView ClientIntCollection { get; set; }
         private ClientObjectManager clientObjectManager;
         public ClientObjectManager ClientObjectManager
         {
@@ -39,32 +38,16 @@ namespace Core
             set { clientObjectManager = value; }
         }
 
-        //public ObservableCollection<IGuiComponent> Components { get; set; }
-
-        public ComponentsList ComponentsList { get; set; }
-
         public ObservableCollection<ClientObject> ClientObjectCollection { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
-            ComponentsList = ComponentsList.GetInstance();
 
-            //Components = new ObservableCollection<IGuiComponent>();
-
-            elements = new Stack<UIElement>();
-            //Components.Add(gauge);
-            //ComponentsList.AddComponent(gauge);
+            ElementsCollection = new ObservableCollection<IGuiComponent>();
 
             gridModifier = new GridModifier(gridMain);
-            //Components.Add(console);
-            //ComponentsList.AddComponent(console);
-
-            //Gauge gauge = new Gauge();
-            //Components.Add(gauge);
-            //gridMain.Children.Add(gauge);
-            //Grid.SetColumn(gauge, 0);
 
             //Components.Console.Console console = new Components.Console.Console();
             //Components.Add(console);
@@ -89,19 +72,14 @@ namespace Core
             Sensor cntSensor = comboBox.DataContext as Sensor;
 
             cntSensor.GuiComponent = comboBox.SelectedItem as IGuiComponent;
-
-            System.Console.WriteLine("asdf");
         }
-
-
-
 
         private void Add_Component_Button_Click(object sender, RoutedEventArgs e)
         {
-            UIElement element = new Components.RichConsole.RichConsole();
-            if (gridModifier.AddComponentForCurrentSelection(element))
+            IGuiComponent element = new Components.RichConsole.RichConsole();
+            if (gridModifier.AddComponentForCurrentSelection( (UIElement) element))
             {
-                elements.Push(element);
+                ElementsCollection.Add(element);
             }
         }
 
@@ -109,7 +87,9 @@ namespace Core
         {
             try
             {
-                gridModifier.RemoveComponent(elements.Pop());
+                IGuiComponent removedElement = ElementsCollection.Last<IGuiComponent>();
+                ElementsCollection.Remove(removedElement);
+                gridModifier.RemoveComponent((UIElement)removedElement);
             }
             catch (InvalidOperationException ex)
             {
