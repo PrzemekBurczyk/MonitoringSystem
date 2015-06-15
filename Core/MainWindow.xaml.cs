@@ -31,6 +31,8 @@ namespace Core
 
         public ObservableCollection<IGuiComponent> ElementsCollection { get; set; }
 
+        private IGuiComponent CurrentlyChosenComponent { get; set; }
+
         private ClientObjectManager clientObjectManager;
         public ClientObjectManager ClientObjectManager
         {
@@ -76,7 +78,7 @@ namespace Core
 
         private void Add_Component_Button_Click(object sender, RoutedEventArgs e)
         {
-            IGuiComponent element = new Components.RichConsole.RichConsole();
+            IGuiComponent element = CurrentlyChosenComponent.getNewInstance();
             if (gridModifier.AddComponentForCurrentSelection( (UIElement) element))
             {
                 ElementsCollection.Add(element);
@@ -99,7 +101,20 @@ namespace Core
 
         private void DataGrid_OnMouseDoublClick(object sender, MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();
+            var frameworkElement = (FrameworkElement)sender;
+
+            var component = frameworkElement.DataContext as IGuiComponent;
+
+            if (component.State == false)
+            {
+                component.State = true;
+                CurrentlyChosenComponent = component;
+            }
+            else
+            {
+                component.State = false;
+                CurrentlyChosenComponent = null;
+            }
         }
     }
 }

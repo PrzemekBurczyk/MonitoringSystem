@@ -19,5 +19,10 @@ namespace GuiComponentInterfaces
         {
             Console.WriteLine("Written to placeholder TextElement, value : %s, dataSeriesId : %d", dataValue.Value, dataValue.DataSeriesId);
         }
+
+        public IGuiComponent getNewInstance()
+        {
+            return new PlaceholderTextGuiElementImpl();
+        }
     }
 }

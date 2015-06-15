@@ -11,5 +11,7 @@ namespace GuiComponentInterfaces
         String ComponentDisplayName { get; set; }
         bool State { get; set; }
         void AddValue(DataValue dataValue);
+
+        IGuiComponent getNewInstance();
     }
 }

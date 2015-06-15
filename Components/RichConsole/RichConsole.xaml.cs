@@ -118,5 +118,10 @@ namespace Components.RichConsole
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public IGuiComponent getNewInstance()
+        {
+            return new RichConsole();
+        }
     }
 }
