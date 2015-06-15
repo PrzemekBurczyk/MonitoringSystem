@@ -62,6 +62,7 @@
     <Compile Include="ComponentsDataGrid.xaml.cs">
       <DependentUpon>ComponentsDataGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ComponentsList.cs" />
     <Compile Include="DispatchingObservableCollection.cs" />
     <Compile Include="Sensor.cs" />
     <Compile Include="MainWindowViewModel.cs" />

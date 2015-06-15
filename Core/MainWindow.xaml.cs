@@ -33,7 +33,9 @@ namespace Core
             set { clientObjectManager = value; }
         }
 
-        public ObservableCollection<IGuiComponent> Components { get; set; }
+        //public ObservableCollection<IGuiComponent> Components { get; set; }
+
+        public ComponentsList ComponentsList { get; set; }
 
         public ObservableCollection<ClientObject> ClientObjectCollection { get; set; }
 
@@ -41,16 +43,19 @@ namespace Core
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
+            ComponentsList = ComponentsList.GetInstance();
 
-            Components = new ObservableCollection<IGuiComponent>();
+            //Components = new ObservableCollection<IGuiComponent>();
 
             Gauge gauge = new Gauge();
-            Components.Add(gauge);
+            //Components.Add(gauge);
+            //ComponentsList.AddComponent(gauge);
             gridMain.Children.Add(gauge);
             Grid.SetColumn(gauge, 0);
 
             Components.Console.Console console = new Components.Console.Console();
-            Components.Add(console);
+            //Components.Add(console);
+            //ComponentsList.AddComponent(console);
             gridMain.Children.Add(console);
             Grid.SetColumn(console, 1);
         }

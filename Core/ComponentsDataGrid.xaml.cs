@@ -30,9 +30,11 @@ namespace Core
         {
             var frameworkElement = (FrameworkElement) sender;
             var component = frameworkElement.DataContext as IGuiComponent;
+            var componentsList = ComponentsList.GetInstance();
             if (component.State == false)
             {
                 component.State = true;
+                componentsList.AddComponent(component);
             }
             else
             {
