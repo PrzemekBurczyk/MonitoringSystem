@@ -99,11 +99,12 @@ namespace Core
             }
         }
 
-        private void DataGrid_OnMouseDoublClick(object sender, MouseButtonEventArgs e)
+        private void DataGrid_OnMouseDoublClick(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
         {
-            var frameworkElement = (FrameworkElement)sender;
+            ComboBox comboBox = sender as ComboBox;
 
-            var component = frameworkElement.DataContext as IGuiComponent;
+            var component = comboBox.SelectedValue as IGuiComponent;
+            //var component = frameworkElement.DataContext as IGuiComponent;
 
             if (component.State == false)
             {

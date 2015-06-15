@@ -91,29 +91,8 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <DataGrid ItemsSource="{Binding AllComponents}" AutoGenerateColumns="False" IsReadOnly="True">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Components" Binding="{Binding ComponentDisplayName}" Width="*"/>
-                </DataGrid.Columns>
-                <DataGrid.RowStyle>
-                    <Style TargetType="{x:Type DataGridRow}">
-                        <EventSetter Event="MouseDoubleClick" Handler="DataGrid_OnMouseDoublClick"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding State}" Value="false">
-                                <Setter Property="Background" Value="Gray"></Setter>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding State}" Value="true">
-                                <Setter Property="Background" Value="GreenYellow"></Setter>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.RowStyle>
-            </DataGrid>
-        </Grid>
+        <ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding AllComponents}" DisplayMemberPath="ComponentDisplayName" SelectionChanged="DataGrid_OnMouseDoublClick" SelectedValuePath="{Binding Path=DataContext}" >
+        </ComboBox>
 
         <Button Click="Add_Component_Button_Click" Content="Add" Grid.Row="2"/>
         <Button Click="Remove_Component_Button_Click" Content="Remove" Grid.Row="3"/>
