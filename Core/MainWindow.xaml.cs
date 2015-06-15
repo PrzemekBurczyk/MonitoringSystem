@@ -96,7 +96,7 @@ namespace Core
 
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Add_Component_Button_Click(object sender, RoutedEventArgs e)
         {
             UIElement element = new Components.RichConsole.RichConsole();
             if (gridModifier.AddComponentForCurrentSelection(element))
@@ -105,7 +105,7 @@ namespace Core
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Remove_Component_Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {

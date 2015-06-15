@@ -114,8 +114,10 @@
                 </DataGrid.RowStyle>
             </DataGrid>
         </Grid>
-        <Button Content="plepleple" Grid.Row="2"/>
-        <Button Content="trueueeu" Grid.Row="3"></Button>
+
+        <Button Click="Add_Component_Button_Click" Content="Add" Grid.Row="2"/>
+        <Button Click="Remove_Component_Button_Click" Content="Remove" Grid.Row="3"/>
+
         <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="499" Grid.RowSpan="2" VerticalAlignment="Top" Width="615">
             <Viewbox StretchDirection="Both" Stretch="Uniform">
                 <Grid Name="gridMain" Grid.Row="1">
