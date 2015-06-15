@@ -17,6 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Components;
+using Components.RichConsole;
 
 namespace Core
 {
@@ -25,6 +27,10 @@ namespace Core
     /// </summary>
     public partial class MainWindow : Window
     {
+        private GridModifier gridModifier;
+
+        Stack<UIElement> elements;
+
         public ICollectionView ClientIntCollection { get; set; }
         private ClientObjectManager clientObjectManager;
         public ClientObjectManager ClientObjectManager
@@ -47,17 +53,23 @@ namespace Core
 
             //Components = new ObservableCollection<IGuiComponent>();
 
-            Gauge gauge = new Gauge();
+            elements = new Stack<UIElement>();
             //Components.Add(gauge);
             //ComponentsList.AddComponent(gauge);
-            gridMain.Children.Add(gauge);
-            Grid.SetColumn(gauge, 0);
 
-            Components.Console.Console console = new Components.Console.Console();
+            gridModifier = new GridModifier(gridMain);
             //Components.Add(console);
             //ComponentsList.AddComponent(console);
-            gridMain.Children.Add(console);
-            Grid.SetColumn(console, 1);
+
+            //Gauge gauge = new Gauge();
+            //Components.Add(gauge);
+            //gridMain.Children.Add(gauge);
+            //Grid.SetColumn(gauge, 0);
+
+            //Components.Console.Console console = new Components.Console.Console();
+            //Components.Add(console);
+            //gridMain.Children.Add(console);
+            //Grid.SetColumn(console, 1);
         }
 
         private void Button_Toggle_Clicked(object sender, RoutedEventArgs e)
@@ -79,6 +91,30 @@ namespace Core
             cntSensor.GuiComponent = comboBox.SelectedItem as IGuiComponent;
 
             System.Console.WriteLine("asdf");
+        }
+
+
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            UIElement element = new Components.RichConsole.RichConsole();
+            if (gridModifier.AddComponentForCurrentSelection(element))
+            {
+                elements.Push(element);
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                gridModifier.RemoveComponent(elements.Pop());
+            }
+            catch (InvalidOperationException ex)
+            {
+                System.Console.WriteLine("No element on the stack");
+            }
         }
     }
 }
