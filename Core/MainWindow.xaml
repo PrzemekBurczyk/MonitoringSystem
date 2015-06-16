@@ -69,7 +69,7 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <DataGrid 
-            ItemsSource="{Binding ClientObjectManager.CustomCollection}"
+            ItemsSource="{Binding ClientObjectManager.ClientObjectCollection}"
             AutoGenerateColumns="False" Grid.RowSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Clients" Binding="{Binding Name}" Width="*"/>

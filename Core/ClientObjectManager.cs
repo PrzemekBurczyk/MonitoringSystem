@@ -10,11 +10,7 @@ namespace Core
 {
     public class ClientObjectManager
     {
-        private int clientNumber = 0;
-
         public ObservableCollection<ClientObject> ClientObjectCollection { get; set; }
-
-        public ObservableCollection<ClientObject> CustomCollection { get; set; }
         
         public void create(ClientConnection clientConnection, ClientObject clientObject)
         {
@@ -23,22 +19,11 @@ namespace Core
             clientConnection.onDataReceived = clientObject.passData;
             clientConnection.onDisconnect = removeClientObjectFromCollection;
 
-            //ClientObjectCollection.Add(clientObject);
-            CustomCollection.Add(clientObject);
-        }
-
-        public ClientObject get(int id)
-        {
-            if (ClientObjectCollection.Count < id + 1)
-            {
-                return null;
-            }
-
-            return ClientObjectCollection[id];
+            ClientObjectCollection.Add(clientObject);
         }
 
         public void removeClientObjectFromCollection(ClientObject clientObject) {
-            CustomCollection.Remove(clientObject);
+            ClientObjectCollection.Remove(clientObject);
         }
     }
 }

@@ -51,9 +51,7 @@ namespace Core
                 new RichConsole(),
                 new TimeChartView(),
             };
-            ObservableCollection<ClientObject> clientObjectsForTests = new ObservableCollection<ClientObject> { new ClientObject("Klient1"), new ClientObject("Klient2") };
-            ClientObjectManager.ClientObjectCollection = clientObjectsForTests;
-            ClientObjectManager.CustomCollection = new DispatchingObservableCollection<ClientObject>();
+            ClientObjectManager.ClientObjectCollection = new DispatchingObservableCollection<ClientObject>();
             serverCommunicationManager = new ServerCommunicationManager(clientObjectManager);
             serverCommunicationManager.Start();
 

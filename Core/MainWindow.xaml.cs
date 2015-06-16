@@ -46,26 +46,17 @@ namespace Core
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
-
             ElementsCollection = new ObservableCollection<IGuiComponent>();
-
             gridModifier = new GridModifier(gridMain);
-
-            //Components.Console.Console console = new Components.Console.Console();
-            //Components.Add(console);
-            //gridMain.Children.Add(console);
-            //Grid.SetColumn(console, 1);
         }
 
         private void Button_Toggle_Clicked(object sender, RoutedEventArgs e)
         {
             FrameworkElement fe = sender as FrameworkElement;
             Sensor clickedSensor = ((Sensor)fe.DataContext);
-            clickedSensor.SensorClicked = true;
+            ClientObject clientObject = (ClientObject)fe.Tag;
 
-            ClientObject co = (ClientObject)fe.Tag;
-
-            co.toggleTransmission(clickedSensor.id);
+            clientObject.toggleTransmission(clickedSensor);
         }
 
         private void Combo_On_Change(object sender, RoutedEventArgs e)

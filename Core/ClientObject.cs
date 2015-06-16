@@ -62,9 +62,11 @@ namespace Core
             }
         }
 
-        public void toggleTransmission(int sensorId)
+        public void toggleTransmission(Sensor sensor)
         {
-            clientConnection.WriteMessage("{\"sensorsToUpdate\":{\""  + sensorId.ToString() + "\":true}}");
+            System.Console.WriteLine("Toggling sensor " + sensor.id + " from " + sensor.SensorClicked);
+            sensor.Toggle();
+            clientConnection.WriteMessage("{\"sensorsToUpdate\":{\""  + sensor.id.ToString() + "\":" + sensor.SensorClicked + "}}");
         }
 
         public void sendDataBack()

@@ -22,13 +22,10 @@ namespace Core
 
         public bool SensorClicked { get; set; }
 
-
         [DataMember]
         public string description;
 
         private DataType _typeVal;
-
-        
         public DataType TypeVal
         {
             get { return _typeVal; }
@@ -65,6 +62,18 @@ namespace Core
             Application.Current.Dispatcher.Invoke(new Action(() => {
                 GuiComponent.AddValue(val);
             }));
+        }
+
+        public void Toggle()
+        {
+            if (SensorClicked == true)
+            {
+                SensorClicked = false;
+            }
+            else
+            {
+                SensorClicked = true;
+            }
         }
     }
 }
