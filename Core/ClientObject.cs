@@ -78,17 +78,5 @@ namespace Core
             sensor.Toggle();
             clientConnection.WriteMessage("{\"sensorsToUpdate\":{\""  + sensor.id.ToString() + "\":" + sensor.SensorClicked + "}}");
         }
-
-        public void sendDataBack()
-        {
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ClientObject));
-            MemoryStream ms = new MemoryStream();
-            serializer.WriteObject(ms, this);
-
-            StreamReader sr = new StreamReader(ms);
-            ms.Seek(0, SeekOrigin.Begin);
-            string data = sr.ReadToEnd();
-            clientConnection.WriteMessage(data);
-        }
     }
 }
