@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 namespace Core
 {
     public delegate void ClientDataReceivedDelegate(String data);
-
     public delegate void ClientDisconnectedDelegate(ClientObject clientObject);
 
     public class ServerCommunicationManager

@@ -11,6 +11,10 @@ using System.Windows;
 
 namespace Core
 {
+    /// <summary>
+    /// Sensor class has data sent on client connect. This class is deserialized from JSON data.
+    /// It belongs to some ClientObject.
+    /// </summary>
     [DataContract]
     public class Sensor
     {
@@ -48,6 +52,10 @@ namespace Core
         public IGuiComponent GuiComponent { get; set; }
         public int DataSeriesId { get; set; }
 
+        /// <summary>
+        /// Pushes certain dataValue to the GuiComponent.
+        /// </summary>
+        /// <param name="val"></param>
         public void AddValue(DataValue val)
         {
             if (GuiComponent == null)
@@ -64,6 +72,10 @@ namespace Core
             }));
         }
 
+        /// <summary>
+        /// Sets state of the Sensor as on and off. This is used to send proper message to Client
+        /// ( wether it should send data about sensor or not ).
+        /// </summary>
         public void Toggle()
         {
             if (SensorClicked == true)

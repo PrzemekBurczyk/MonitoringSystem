@@ -9,17 +9,21 @@ using System.Threading.Tasks;
 
 namespace Core
 {
+    /// <summary>
+    /// Object of this class handles the connection between the client and the core.
+    /// </summary>
     public class ClientConnection
     {
         public TcpClient tcpClient;
         protected NetworkStream clientStream;
-
         public ClientObject clientObject;
 
         public ClientDataReceivedDelegate onDataReceived;
-
         public ClientDisconnectedDelegate onDisconnect;
 
+        /// <summary>
+        /// Data, which were loaded with previous read, but belonging to currently parsed packet.
+        /// </summary>
         public byte[] receivedDataLeftovers;
 
         public ClientConnection(TcpClient client)
