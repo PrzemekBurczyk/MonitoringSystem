@@ -19,7 +19,9 @@ namespace Core
         public void create(ClientConnection clientConnection, ClientObject clientObject)
         {
             clientObject.clientConnection = clientConnection;
+            clientConnection.clientObject = clientObject;
             clientConnection.onDataReceived = clientObject.passData;
+            clientConnection.onDisconnect = removeClientObjectFromCollection;
 
             //ClientObjectCollection.Add(clientObject);
             CustomCollection.Add(clientObject);
@@ -33,6 +35,10 @@ namespace Core
             }
 
             return ClientObjectCollection[id];
+        }
+
+        public void removeClientObjectFromCollection(ClientObject clientObject) {
+            CustomCollection.Remove(clientObject);
         }
     }
 }

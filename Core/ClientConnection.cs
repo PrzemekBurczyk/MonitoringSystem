@@ -14,7 +14,11 @@ namespace Core
         public TcpClient tcpClient;
         protected NetworkStream clientStream;
 
+        public ClientObject clientObject;
+
         public ClientDataReceivedDelegate onDataReceived;
+
+        public ClientDisconnectedDelegate onDisconnect;
 
         public byte[] receivedDataLeftovers;
 
@@ -49,6 +53,7 @@ namespace Core
             catch (IOException)
             {
                 Console.WriteLine("User disconnected");
+                onDisconnect(clientObject);
             }
             catch (SocketException)
             {
