@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Core
 {
+    /// <summary>
+    /// Class representing Client - the one which connects to our app via TCP ( usually a robot).
+    /// </summary>
     [DataContract]
     public class ClientObject
     {
@@ -36,6 +39,10 @@ namespace Core
             }
         }
 
+        /// <summary>
+        /// Passes data received from client to sensors.
+        /// </summary>
+        /// <param name="data"></param>
         public void passData(String data)
         {
             DataContractJsonSerializerSettings settings = new DataContractJsonSerializerSettings();
@@ -62,21 +69,14 @@ namespace Core
             }
         }
 
-        public void toggleTransmission(int sensorId)
+        /// <summary>
+        /// Sends message to Client to turn off or on sending of sensor data from client.
+        /// </summary>
+        /// <param name="sensor"></param>
+        public void toggleTransmission(Sensor sensor)
         {
-            clientConnection.WriteMessage("{\"sensorsToUpdate\":{\""  + sensorId.ToString() + "\":true}}");
-        }
-
-        public void sendDataBack()
-        {
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ClientObject));
-            MemoryStream ms = new MemoryStream();
-            serializer.WriteObject(ms, this);
-
-            StreamReader sr = new StreamReader(ms);
-            ms.Seek(0, SeekOrigin.Begin);
-            string data = sr.ReadToEnd();
-            clientConnection.WriteMessage(data);
+            sensor.Toggle();
+            clientConnection.WriteMessage("{\"sensorsToUpdate\":{\""  + sensor.id.ToString() + "\":" + sensor.SensorClicked + "}}");
         }
     }
 }

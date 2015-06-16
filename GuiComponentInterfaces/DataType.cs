@@ -11,6 +11,7 @@ namespace GuiComponentInterfaces
         TEXT,
         INTEGER,
         VECTOR,
-        BITMAP
+        BITMAP,
+        STRING_MAP
     }
 }

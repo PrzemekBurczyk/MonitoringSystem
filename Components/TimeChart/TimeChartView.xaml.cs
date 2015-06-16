@@ -3,7 +3,9 @@ using Sparrow.Chart;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,13 +18,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Components.Annotations;
 
 namespace Components.TimeChart
 {
     /// <summary>
     /// Interaction logic for TimeChartView.xaml
     /// </summary>
-    public partial class TimeChartView : UserControl, IGuiComponent
+    public partial class TimeChartView : UserControl, IGuiComponent, INotifyPropertyChanged
     {
         private ViewModel ViewModel { get; set; }
 
@@ -69,13 +72,31 @@ namespace Components.TimeChart
         void TimeChartView_Loaded(object sender, RoutedEventArgs e)
         {
             ViewModel = (ViewModel)MainGrid.DataContext;
-
+            State = false;
             //RunDemo();
         }
 
         public DataType[] GetTypes()
         {
             return new DataType[] { DataType.INTEGER };
+        }
+
+        public string ComponentDisplayName
+        {
+            get { return "TimeChart"; }
+            set { }
+        }
+
+        private bool _state;
+
+        public bool State
+        {
+            get { return _state; }
+            set
+            {
+                _state = value;
+                OnPropertyChanged("State");
+            }
         }
 
         public void AddValue(DataValue dataValue)
@@ -165,6 +186,20 @@ namespace Components.TimeChart
             areaSeries.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#11117DBB"));
             areaSeries.StrokeThickness = 1.0;
             Chart.Series.Add(areaSeries);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public IGuiComponent getNewInstance()
+        {
+            return new TimeChartView();
         }
     }
 }

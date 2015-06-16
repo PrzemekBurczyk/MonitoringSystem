@@ -54,16 +54,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BoolToVisibilityConverter.cs" />
     <Compile Include="ClientMessage.cs" />
     <Compile Include="ClientsDataGrid.xaml.cs">
       <DependentUpon>ClientsDataGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ComponentsDataGrid.xaml.cs">
+      <DependentUpon>ComponentsDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ComponentsList.cs" />
     <Compile Include="DispatchingObservableCollection.cs" />
     <Compile Include="Sensor.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="SensorData.cs" />
     <Compile Include="ServerCommunicationManager.cs" />
     <Page Include="ClientsDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ComponentsDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

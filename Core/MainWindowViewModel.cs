@@ -6,6 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using Components.Console;
+using Components.Gauge;
+using Components.PieChart;
+using Components.RichConsole;
+using Components.TimeChart;
+using GuiComponentInterfaces;
+using Console = Components.Console.Console;
 
 namespace Core
 {
@@ -14,6 +21,8 @@ namespace Core
         private ClientObjectManager clientObjectManager;
         private bool _isExpanded;
         ServerCommunicationManager serverCommunicationManager;
+
+        public List<IGuiComponent> AllComponents { get; set; }
         public ClientObjectManager ClientObjectManager
         {
             get { return clientObjectManager; }
@@ -35,11 +44,17 @@ namespace Core
         public MainWindowViewModel()
         {
             ClientObjectManager = new ClientObjectManager();
-            ObservableCollection<ClientObject> clientObjectsForTests = new ObservableCollection<ClientObject> { new ClientObject("Klient1"), new ClientObject("Klient2") };
-            ClientObjectManager.ClientObjectCollection = clientObjectsForTests;
-            ClientObjectManager.CustomCollection = new DispatchingObservableCollection<ClientObject>();
+            AllComponents = new List<IGuiComponent>
+            {
+                new Console(),
+                new Gauge(),
+                new RichConsole(),
+                new TimeChartView(),
+            };
+            ClientObjectManager.ClientObjectCollection = new DispatchingObservableCollection<ClientObject>();
             serverCommunicationManager = new ServerCommunicationManager(clientObjectManager);
             serverCommunicationManager.Start();
+
         }
     }
 }

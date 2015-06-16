@@ -90,6 +90,7 @@
     </Compile>
     <Compile Include="CPUPerformance\Model.cs" />
     <Compile Include="CPUPerformance\ViewModel.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="GridModifier.cs" />
     <Compile Include="RichConsole\RichConsole.xaml.cs">
       <DependentUpon>RichConsole.xaml</DependentUpon>

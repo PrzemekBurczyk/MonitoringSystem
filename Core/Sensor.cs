@@ -7,9 +7,14 @@ using System.Threading.Tasks;
 
 using GuiComponentInterfaces;
 using System.Runtime.Serialization;
+using System.Windows;
 
 namespace Core
 {
+    /// <summary>
+    /// Sensor class has data sent on client connect. This class is deserialized from JSON data.
+    /// It belongs to some ClientObject.
+    /// </summary>
     [DataContract]
     public class Sensor
     {
@@ -19,13 +24,12 @@ namespace Core
         [DataMember]
         public String name { get; set; }
 
+        public bool SensorClicked { get; set; }
 
         [DataMember]
         public string description;
 
         private DataType _typeVal;
-
-        
         public DataType TypeVal
         {
             get { return _typeVal; }
@@ -48,6 +52,10 @@ namespace Core
         public IGuiComponent GuiComponent { get; set; }
         public int DataSeriesId { get; set; }
 
+        /// <summary>
+        /// Pushes certain dataValue to the GuiComponent.
+        /// </summary>
+        /// <param name="val"></param>
         public void AddValue(DataValue val)
         {
             if (GuiComponent == null)
@@ -58,7 +66,26 @@ namespace Core
 
             val.DataSeriesId = DataSeriesId;
             val.Type = TypeVal;
-            GuiComponent.AddValue(val);
+
+            Application.Current.Dispatcher.Invoke(new Action(() => {
+                GuiComponent.AddValue(val);
+            }));
+        }
+
+        /// <summary>
+        /// Sets state of the Sensor as on and off. This is used to send proper message to Client
+        /// ( wether it should send data about sensor or not ).
+        /// </summary>
+        public void Toggle()
+        {
+            if (SensorClicked == true)
+            {
+                SensorClicked = false;
+            }
+            else
+            {
+                SensorClicked = true;
+            }
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using GuiComponentInterfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,13 +15,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Components.Annotations;
 
 namespace Components.RichConsole
 {
     /// <summary>
     /// Interaction logic for RichConsole.xaml
     /// </summary>
-    public partial class RichConsole : UserControl, IGuiComponent
+    public partial class RichConsole : UserControl, IGuiComponent, INotifyPropertyChanged
     {
         public void addData(string line, int seriesId)
         {
@@ -43,6 +46,7 @@ namespace Components.RichConsole
         public RichConsole()
         {
             InitializeComponent();
+            State = false;
         }
 
         //private void btn1_Click(object sender, RoutedEventArgs e)
@@ -54,10 +58,27 @@ namespace Components.RichConsole
         //    dv.DataSeriesId = 1;
         //    AddValue(dv);
         //}
-
         public DataType[] GetTypes()
         {
             return new DataType[] { DataType.TEXT, DataType.INTEGER };
+        }
+
+        public string ComponentDisplayName
+        {
+            get { return "RichConsole"; }
+            set { }
+        }
+
+        private bool _state;
+
+        public bool State
+        {
+            get { return _state; }
+            set
+            {
+                _state = value;
+                OnPropertyChanged("State");
+            }
         }
 
         public void AddValue(DataValue dataValue)
@@ -87,6 +108,20 @@ namespace Components.RichConsole
             {
                 return Brushes.Red;
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public IGuiComponent getNewInstance()
+        {
+            return new RichConsole();
         }
     }
 }

@@ -8,10 +8,14 @@ using System.Threading.Tasks;
 
 namespace Core
 {
+    /// <summary>
+    /// Class represents data sent from Client. It is deserialized from JSON. 
+    /// It has sensorDictionary, where key is sensor Id, and singleSensorData object
+    /// has the current value of the sensor.
+    /// </summary>
     [DataContract]
     class SensorData
     {
-        
         private Dictionary<int, SingleSensorData> sensorsDictionary = new Dictionary<int, SingleSensorData>();
 
         [DataMember(Name = "sensors")]

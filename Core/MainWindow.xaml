@@ -5,8 +5,11 @@
         xmlns:cpu="clr-namespace:Components.CPUPerformance;assembly=Components"
         xmlns:loc="clr-namespace:Core" 
         xmlns:controls="clr-namespace:Components;assembly=Components"
+        xmlns:local="clr-namespace:Core"
         Title="MainWindow" Width="900" Height="600">
     <Window.Resources>
+        <loc:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <loc:MainWindow x:Key="MainWindow"/>
         <Style x:Key="TreeExpanderStyle" TargetType="CheckBox">
             <Setter Property="Background" Value="#FF448DCA"/>
             <Setter Property="Foreground" Value="#FF000000"/>
@@ -56,16 +59,18 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="9*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DataGrid
-            ItemsSource="{Binding ClientObjectManager.CustomCollection}"
-            AutoGenerateColumns="False" Grid.RowSpan="3" Margin="0,0,644.333,51.667">
+        <DataGrid 
+            ItemsSource="{Binding ClientObjectManager.ClientObjectCollection}"
+            AutoGenerateColumns="False" Grid.RowSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Clients" Binding="{Binding Name}" Width="*"/>
                 <DataGridTemplateColumn Header="Sensors" Width="*">
@@ -76,6 +81,7 @@
                                     <DataTemplate>
                                         <StackPanel>
                                             <Button Content="{Binding name}" Margin="4" Click="Button_Toggle_Clicked" Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=ItemsControl}}"/>
+                                            <ComboBox x:Name="Combo" ItemsSource="{Binding Path=ElementsCollection, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" DisplayMemberPath="ComponentDisplayName" SelectedValuePath="{Binding Path=DataContext}" SelectionChanged="Combo_On_Change"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -85,11 +91,28 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="499" Margin="254,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="615">
-            <Viewbox StretchDirection="Both" Stretch="Uniform">
-                <controls:MainWindow></controls:MainWindow>
-            </Viewbox>
-        </Border>
+        <ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding AllComponents}" DisplayMemberPath="ComponentDisplayName" SelectionChanged="DataGrid_OnMouseDoublClick" SelectedValuePath="{Binding Path=DataContext}" >
+        </ComboBox>
+
+        <Button Click="Add_Component_Button_Click" Content="Add" Grid.Row="2"/>
+        <Button Click="Remove_Component_Button_Click" Content="Remove" Grid.Row="3"/>
+
+        <Grid Name="gridMain" Grid.Column="1" Grid.RowSpan="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+        </Grid>
 
     </Grid>
 </Window>

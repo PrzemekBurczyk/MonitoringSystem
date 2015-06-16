@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Components.Gauge;
+using Components.Console;
+using GuiComponentInterfaces;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -14,6 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Components;
+using Components.RichConsole;
 
 namespace Core
 {
@@ -22,7 +27,12 @@ namespace Core
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ICollectionView ClientIntCollection { get; set; }
+        private GridModifier gridModifier;
+
+        public ObservableCollection<IGuiComponent> ElementsCollection { get; set; }
+
+        private IGuiComponent CurrentlyChosenComponent { get; set; }
+
         private ClientObjectManager clientObjectManager;
         public ClientObjectManager ClientObjectManager
         {
@@ -30,57 +40,73 @@ namespace Core
             set { clientObjectManager = value; }
         }
 
-        //public ICollectionView ClientObjectCollection { get; set; }
         public ObservableCollection<ClientObject> ClientObjectCollection { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
-
-            //clientObjectManager = new ClientObjectManager();
-            //ClientObjectCollection = new ObservableCollection<ClientObject> { new ClientObject("Pepper"), new ClientObject("Zoe") };
-
-            //serverCommunicationManager = new ServerCommunicationManager(clientObjectManager);
-
-            //automatyczne nasłuchiwanie przy starcie aplikacji
-            //serverCommunicationManager.Start();
-            //ToggleButton.IsEnabled = true;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //serverCommunicationManager.Start();
-            //ToggleButton.IsEnabled = true;
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            //Run this only after connection and receiving initial data from Client
-            ClientObject placeholder = clientObjectManager.get(0);
-            if (placeholder != null)
-            {
-                placeholder.toggleTransmission(1);
-            }
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            ClientObject placeholder = clientObjectManager.get(0);
-            if (placeholder != null)
-            {
-                placeholder.sendDataBack();
-            }
+            ElementsCollection = new ObservableCollection<IGuiComponent>();
+            gridModifier = new GridModifier(gridMain);
         }
 
         private void Button_Toggle_Clicked(object sender, RoutedEventArgs e)
         {
             FrameworkElement fe = sender as FrameworkElement;
             Sensor clickedSensor = ((Sensor)fe.DataContext);
+            ClientObject clientObject = (ClientObject)fe.Tag;
 
-            ClientObject co = (ClientObject)fe.Tag;
+            clientObject.toggleTransmission(clickedSensor);
+        }
 
-            co.toggleTransmission(clickedSensor.id);
-        } 
+        private void Combo_On_Change(object sender, RoutedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            Sensor cntSensor = comboBox.DataContext as Sensor;
+
+            cntSensor.GuiComponent = comboBox.SelectedItem as IGuiComponent;
+        }
+
+        private void Add_Component_Button_Click(object sender, RoutedEventArgs e)
+        {
+            IGuiComponent element = CurrentlyChosenComponent.getNewInstance();
+            if (gridModifier.AddComponentForCurrentSelection( (UIElement) element))
+            {
+                ElementsCollection.Add(element);
+            }
+        }
+
+        private void Remove_Component_Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                IGuiComponent removedElement = ElementsCollection.Last<IGuiComponent>();
+                ElementsCollection.Remove(removedElement);
+                gridModifier.RemoveComponent((UIElement)removedElement);
+            }
+            catch (InvalidOperationException ex)
+            {
+                System.Console.WriteLine("No element on the stack");
+            }
+        }
+
+        private void DataGrid_OnMouseDoublClick(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
+        {
+            ComboBox comboBox = sender as ComboBox;
+
+            var component = comboBox.SelectedValue as IGuiComponent;
+            //var component = frameworkElement.DataContext as IGuiComponent;
+
+            if (component.State == false)
+            {
+                component.State = true;
+                CurrentlyChosenComponent = component;
+            }
+            else
+            {
+                component.State = false;
+                CurrentlyChosenComponent = null;
+            }
+        }
     }
 }

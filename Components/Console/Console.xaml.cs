@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,13 +15,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Components.Annotations;
 
 namespace Components.Console
 {
     /// <summary>
     /// Interaction logic for Console.xaml
     /// </summary>
-    public partial class Console : UserControl, IGuiComponent
+    public partial class Console : UserControl, IGuiComponent, INotifyPropertyChanged
     {
         private ViewModel ViewModel { get; set; }
 
@@ -65,11 +67,35 @@ namespace Components.Console
         {
             ViewModel = (ViewModel)MainGrid.DataContext;
             ViewModel.OnConsoleTextChanged += new EventHandler(OnConsoleTextChanged);
+            State = false;
         }
 
         private void OnConsoleTextChanged(object sender, EventArgs eventArgs)
         {
-            textBox.ScrollToEnd();
+            Dispatcher.Invoke((Action)(() => { textBox.ScrollToEnd(); }));
+        }
+
+        public string DataTypesStr { get; set; }
+
+        public string ComponentDisplayName
+        {
+            get
+            {
+                return "Console";
+            }
+            set {}
+        }
+
+        private bool _state;
+
+        public bool State
+        {
+            get { return _state; }
+            set
+            {
+                _state = value;
+                OnPropertyChanged("State");
+            }
         }
 
         public DataType[] GetTypes()
@@ -80,6 +106,20 @@ namespace Components.Console
         public void AddValue(DataValue dataValue)
         {
             addData(new DateTime(dataValue.Timestamp).ToLongTimeString() + " - " + dataValue.Value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public IGuiComponent getNewInstance()
+        {
+            return new Console();
         }
     }
 }
